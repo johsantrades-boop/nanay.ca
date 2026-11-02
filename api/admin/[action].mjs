@@ -14,20 +14,22 @@ const SEED = path.join(APP, 'seed', 'menu.json');
 const MENU = 'app/content/menu.json', AUTH = 'app/content/auth.json', UPLOADS = 'app/content/uploads';
 const SESSION_MS = 12 * 60 * 60 * 1000;
 const env = process.env;
+const TOKEN = String(env.GITHUB_TOKEN || '').trim(); // pasted values often carry a space or line break
 const REPO = env.NANAY_GITHUB_REPO || (env.VERCEL_GIT_REPO_OWNER ? `${env.VERCEL_GIT_REPO_OWNER}/${env.VERCEL_GIT_REPO_SLUG}` : 'johsantrades-boop/nanay.ca');
 const BRANCH = env.NANAY_GITHUB_BRANCH || env.VERCEL_GIT_COMMIT_REF || 'main';
 const failed = new Map(); // ip -> { n, until }; per running instance, so a best-effort brake
 
 /* ---------------- GitHub storage ---------------- */
 async function gh(method, file, body, accept = 'application/vnd.github+json') {
-  if (!env.GITHUB_TOKEN) throw Object.assign(new Error('The admin is not set up yet: add GITHUB_TOKEN in Vercel.'), { code: 500 });
+  if (!TOKEN) throw Object.assign(new Error('The admin is not set up yet: add GITHUB_TOKEN in Vercel.'), { code: 500 });
   const url = `https://api.github.com/repos/${REPO}/contents/${file.split('/').map(encodeURIComponent).join('/')}` + (method === 'GET' ? `?ref=${encodeURIComponent(BRANCH)}` : '');
   const r = await fetch(url, {
-    method, headers: { Authorization: `Bearer ${env.GITHUB_TOKEN}`, Accept: accept, 'X-GitHub-Api-Version': '2022-11-28', 'User-Agent': 'nanay-admin' },
+    method, headers: { Authorization: `Bearer ${TOKEN}`, Accept: accept, 'X-GitHub-Api-Version': '2022-11-28', 'User-Agent': 'nanay-admin' },
     body: body && JSON.stringify({ ...body, branch: BRANCH }),
   });
   if (method === 'GET' && r.status === 404) return null;
   if (r.status === 409 || r.status === 422) throw Object.assign(new Error('The menu was changed in another window. Reload to get the latest version.'), { code: 409 });
+  if (r.status === 401) throw Object.assign(new Error('GitHub did not accept GITHUB_TOKEN (401). Paste the whole token again in Vercel, then redeploy.'), { code: 502 });
   if (!r.ok) throw Object.assign(new Error(`Saving to GitHub failed (${r.status}). Check GITHUB_TOKEN in Vercel.`), { code: 502 });
   return accept.includes('raw') ? Buffer.from(await r.arrayBuffer()) : r.json();
 }
@@ -45,7 +47,7 @@ async function loadMenu() {
 
 /* ---------------- Auth ---------------- */
 const scrypt = (pw, salt) => crypto.scryptSync(String(pw), salt, 64);
-const sessionKey = () => crypto.createHash('sha256').update('nanay-session:' + (env.NANAY_SESSION_SECRET || env.GITHUB_TOKEN || '')).digest();
+const sessionKey = () => crypto.createHash('sha256').update('nanay-session:' + (env.NANAY_SESSION_SECRET || TOKEN)).digest();
 async function loadAuth() {
   const f = await readJson(AUTH);
   if (f) return { ...f.json, sha: f.sha, version: f.json.salt };
