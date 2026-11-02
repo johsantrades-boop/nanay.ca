@@ -1,0 +1,98 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "kicker": "Takeout · Delivery · Catering · Events",
+        "heading": "Catering for parties and handaan",
+        "text": "<p>Party trays for 15 to 100 guests: charcoal-grilled inihaw, palabok, Filipino style spaghetti, rice and desserts. Tell us the date and headcount and we'll plan it with you.</p>",
+        "button_label": "Send an enquiry",
+        "button_link": "",
+        "show_text_button": true,
+        "fallback": "photo-catering",
+        "image_alt": "Full trays of palabok, grilled meats and rice laid out for a party",
+        "sand": true
+      }
+    },
+    "packages": {
+      "type": "packages",
+      "blocks": {
+        "k15": { "type": "package", "settings": { "product": "party-feast-good-for-12-13-people", "serves": "15", "unit": "guests", "title": "Party Feast", "includes": "<ul><li>Steamed Rice Tray</li><li>Palabok Tray or Filipino Style Spaghetti Tray</li><li>Half/Half Meat Tray (your choice of 2 meats in 1 tray)</li><li>Grilled Meat Tray: 30 BBQ Pork Skewers, Chicken Inasal with Calamansi, or Grilled Liempo</li></ul>" } },
+        "k30": { "type": "package", "settings": { "product": "fiesta-feast-good-for-30-35-people", "serves": "30–35", "unit": "guests", "title": "Fiesta Feast", "includes": "<ul><li>Steamed Rice x 2</li><li>Palabok</li><li>Filipino Style Spaghetti</li><li>Your choice of THREE Inihaw Meat Trays (Chicken Inasal, Grilled Liempo, 30 Skewers)</li></ul><p>All Half Size Deep Trays</p>" } },
+        "k50": { "type": "package", "settings": { "product": "feast-for-50", "serves": "50", "unit": "guests", "title": "Feast for 50", "includes": "<ul><li>2 Full Size Steamed Rice</li><li>1 Full Size Palabok</li><li>1 Full Size Filipino Style Spaghetti</li><li>1 Full Size Grilled/Inihaw na Liempo</li><li>1 Full Size Chicken Inasal</li><li>50 BBQ Pork Skewers</li><li>Nanay Vinegar</li></ul>" } },
+        "k100": { "type": "package", "settings": { "product": "fiesta-festival-good-for-100", "serves": "100", "unit": "guests", "title": "Fiesta Festival", "includes": "<ul><li>4 Full Size Steamed Rice</li><li>2 Full Size Palabok</li><li>2 Full Size Filipino Style Spaghetti</li><li>2 Full Size Grilled/Inihaw na Liempo</li><li>2 Full Size Chicken Inasal</li><li>100 BBQ Pork Skewers</li><li>Nanay Vinegar</li></ul>" } }
+      },
+      "block_order": ["k15", "k30", "k50", "k100"],
+      "settings": {
+        "kicker": "Party packages",
+        "heading": "Pick your party size",
+        "text": "Every package is built from our most-loved trays. Add desserts or extra trays from the menu.",
+        "footnote": "<p>*Payment/deposit required to confirm order and reserve event’s date and time. *Deposits are non-refundable. *Contact us for any substitutions at (604) 652-1930.</p>",
+        "sand": false
+      }
+    },
+    "planner": {
+      "type": "feast-planner",
+      "blocks": {
+        "p15": { "type": "package", "settings": { "product": "party-feast-good-for-12-13-people", "serves": 15, "style": "party", "title": "Party Feast", "note": "good for 15" } },
+        "p30": { "type": "package", "settings": { "product": "fiesta-feast-good-for-30-35-people", "serves": 30, "style": "party", "title": "Fiesta Feast", "note": "good for 30–35" } },
+        "p50": { "type": "package", "settings": { "product": "feast-for-50", "serves": 50, "style": "party", "title": "Feast for 50", "note": "good for 50" } },
+        "p100": { "type": "package", "settings": { "product": "fiesta-festival-good-for-100", "serves": 100, "style": "party", "title": "Fiesta Festival", "note": "good for 100" } },
+        "i4": { "type": "package", "settings": { "product": "mini-inihaw-bbq-grilled-feast", "serves": 4, "style": "inihaw", "title": "Mini Inihaw Feast", "note": "good for 4" } },
+        "i6": { "type": "package", "settings": { "product": "inihaw-feast", "serves": 6, "style": "inihaw", "title": "Inihaw Feast", "note": "good for 6–8" } },
+        "g4": { "type": "package", "settings": { "product": "mother-s-day-weekend-silogs", "variant": "Mini Silog Feast", "serves": 4, "style": "silog", "title": "Mini Silog Feast", "note": "good for 4" } },
+        "g6": { "type": "package", "settings": { "product": "mother-s-day-weekend-silogs", "variant": "Silog Feast", "serves": 6, "style": "silog", "title": "Silog Feast", "note": "good for 6–8" } }
+      },
+      "block_order": ["p15", "p30", "p50", "p100", "i4", "i6", "g4", "g6"],
+      "settings": {
+        "kicker": "Feast planner",
+        "heading": "How much food do I need?",
+        "text": "Slide to your guest count. We'll suggest the trays and the price per person, then you can text it to us or add it to your cart.",
+        "default_guests": 40,
+        "extras": "byof",
+        "dessert": "ube-halaya",
+        "dessert_label": "Add dessert (Ube Halaya or Leche Flan)",
+        "dessert_note": "10 x 8 oz · good for about 20-30 people",
+        "dessert_serves": 30,
+        "note": "Planned from the low end of each 'good for' range, so nobody goes hungry.",
+        "sand": true
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "title": "Great for parties!", "text": "The food was great! If you’re looking for pinoy food to serve in your party, Nanay is a great choice. Hindi ka mapapahiya sa bisita. Our visitors loved it! Everything tastes good. They delivered the food in time and the food was packaged very nicely. Highly recommended 👍", "name": "Vero R." } },
+        "r2": { "type": "review", "settings": { "title": "Great food and service!", "text": "I ordered the fiesta feast and added an extra tray of skewers for my birthday party. All the guests said the food was amazing and I agreed! Not only was the food delicious, the service was exceptional! I added delivery to Vancouver and they arrived ahead of schedule. I look forward to ordering from Nanay Kitchen again. Thank you for the outstanding food and service! Maraming salamat.", "name": "Julian E." } },
+        "r3": { "type": "review", "settings": { "title": "", "text": "The Best Ever!!!! We all loved it!!!", "name": "Eleanor C." } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": { "heading": "Hosts say", "text": "" }
+    },
+    "enquiry": {
+      "type": "enquiry-form",
+      "settings": {
+        "type": "Catering",
+        "event_fields": true,
+        "kicker": "Catering enquiry",
+        "heading": "Tell us about your event",
+        "text": "Share the date and headcount and we'll text you a plan and quote.",
+        "placeholder": "Anything else? Favourite dishes, timing, venue…",
+        "button": "Send enquiry",
+        "success": "Salamat! We got your enquiry and will text you soon.",
+        "sand": false
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "q", "settings": { "question": "How far ahead should I book?", "answer_source": "none", "answer": "<p>As early as you can, especially for 50 or 100 guests. Your date is reserved once your payment/deposit is in. Deposits are non-refundable.</p>" } },
+        "q2": { "type": "q", "settings": { "question": "Can I swap a dish?", "answer_source": "none", "answer": "<p>Contact us for any substitutions at (604) 652-1930.</p>" } },
+        "q3": { "type": "q", "settings": { "question": "Do you deliver?", "answer_source": "delivery", "answer": "" } },
+        "q4": { "type": "q", "settings": { "question": "Can I change or cancel my order?", "answer_source": "policy", "answer": "" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": { "kicker": "Good to know", "heading": "Catering questions", "open_first": false, "schema_markup": true, "sand": true }
+    }
+  },
+  "order": ["hero", "packages", "planner", "reviews", "enquiry", "faq"]
+}

@@ -1,0 +1,84 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Nanay",
+    "theme_version": "1.0.0",
+    "theme_author": "Nanay",
+    "theme_documentation_url": "https://nanay.ca",
+    "theme_support_url": "https://nanay.ca"
+  },
+  {
+    "name": "Business info",
+    "settings": [
+      { "type": "paragraph", "content": "Shown in the header, footer, product pages, cart and ordering sections. Change it here once and it updates everywhere." },
+      { "type": "text", "id": "phone_display", "label": "Phone (as shown)", "default": "(604) 652-1930" },
+      { "type": "text", "id": "sms_number", "label": "Phone for text/call links", "info": "International format, digits only after +. Example: +16046521930", "default": "+16046521930" },
+      { "type": "text", "id": "email", "label": "Email", "default": "info@nanay.ca" },
+      { "type": "text", "id": "hours", "label": "Hours", "default": "Mon–Sun 10am–6pm" },
+      { "type": "text", "id": "hours_schema", "label": "Hours for Google", "info": "Same hours in this format: Mo-Su 10:00-18:00", "default": "Mo-Su 10:00-18:00" },
+      { "type": "text", "id": "pickup_name", "label": "Pickup location name", "default": "Pureprep Langley" },
+      { "type": "text", "id": "pickup_address", "label": "Pickup street address", "info": "Leave empty to hide. Shown with a map link." },
+      { "type": "text", "id": "city", "label": "City / region", "default": "Langley, BC" },
+      { "type": "url", "id": "map_url", "label": "Google Maps link for pickup" },
+      { "type": "text", "id": "delivery_note", "label": "Delivery summary", "default": "Delivery available. Minimum $30 purchase for delivery." },
+      { "type": "number", "id": "delivery_minimum", "label": "Delivery minimum (dollars)", "default": 30 },
+      { "type": "number", "id": "lead_days", "label": "Days of notice needed for orders", "info": "Used for the earliest date customers can pick in the cart.", "default": 3 },
+      { "type": "textarea", "id": "refund_policy", "label": "Refund / cancellation note", "default": "Orders can be modified up to 3 days before order pickup/delivery date. No refund or cancellation within 1 week of order pickup/delivery date. Credit can be issued upon request." }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      { "type": "url", "id": "instagram_url", "label": "Instagram", "default": "https://www.instagram.com/nanaykitchen/" },
+      { "type": "url", "id": "threads_url", "label": "Threads", "default": "https://www.threads.net/@nanaykitchen" },
+      { "type": "url", "id": "facebook_url", "label": "Facebook" },
+      { "type": "url", "id": "google_reviews_url", "label": "Google reviews link" }
+    ]
+  },
+  {
+    "name": "Logo and intro",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo image", "info": "Optional. Without an image the NANAY wordmark is drawn in the brand font." },
+      { "type": "range", "id": "logo_height", "label": "Logo height", "min": 28, "max": 64, "step": 2, "unit": "px", "default": 44 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "Square, 96 × 96 px or larger." },
+      { "type": "checkbox", "id": "show_intro", "label": "Show logo intro on first visit", "default": true }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "paragraph", "content": "Defaults come from the Nanay brand kit and pass WCAG AA contrast. Check contrast if you change them." },
+      { "type": "color", "id": "color_bg", "label": "Background", "default": "#FFF9F0" },
+      { "type": "color", "id": "color_surface", "label": "Cards and forms", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_sand", "label": "Alternate section background", "default": "#F4E9DC" },
+      { "type": "color", "id": "color_text", "label": "Text (logo brown)", "default": "#392618" },
+      { "type": "color", "id": "color_muted", "label": "Muted text", "default": "#6B5444" },
+      { "type": "color", "id": "color_primary", "label": "Primary buttons", "default": "#C2410C" },
+      { "type": "color", "id": "color_primary_hover", "label": "Primary buttons hover", "default": "#9A3412" },
+      { "type": "color", "id": "color_on_primary", "label": "Text on primary buttons", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_aqua", "label": "Nanay aqua (backgrounds only)", "default": "#BFE4EA" },
+      { "type": "color", "id": "color_aqua_ink", "label": "Deep aqua (icons)", "default": "#1F5E6B" },
+      { "type": "color", "id": "color_yolk", "label": "Highlight badges", "default": "#F6B73C" },
+      { "type": "color", "id": "color_border", "label": "Dividers", "default": "#E7D8C6" },
+      { "type": "color", "id": "color_border_control", "label": "Form borders", "default": "#8F7966" }
+    ]
+  },
+  {
+    "name": "Cart and ordering",
+    "settings": [
+      { "type": "select", "id": "cart_type", "label": "When something is added", "options": [ { "value": "drawer", "label": "Open cart drawer" }, { "value": "page", "label": "Go to cart page" } ], "default": "drawer" },
+      { "type": "checkbox", "id": "cart_fulfilment", "label": "Ask pickup or delivery in cart", "default": true },
+      { "type": "checkbox", "id": "cart_date", "label": "Ask for the date in cart", "info": "Turn off if a delivery-date app already handles this.", "default": true },
+      { "type": "checkbox", "id": "cart_time", "label": "Ask for preferred time in cart", "default": true },
+      { "type": "text", "id": "cart_note_label", "label": "Order note label", "default": "Notes for Nanay (allergies, substitutions, address details)" },
+      { "type": "checkbox", "id": "show_order_bar", "label": "Show sticky Order bar on phones", "default": true }
+    ]
+  },
+  {
+    "name": "Search engines",
+    "settings": [
+      { "type": "textarea", "id": "seo_description", "label": "Default description", "info": "Used when a page has no description of its own.", "default": "Filipino party trays and feasts for 4 to 100 from Nanay in Langley, BC. Charcoal-grilled inihaw, silogs, palabok and desserts. Text (604) 652-1930 or order online." },
+      { "type": "image_picker", "id": "share_image", "label": "Default social share image" }
+    ]
+  }
+]

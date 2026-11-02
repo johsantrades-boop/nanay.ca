@@ -1,0 +1,16 @@
+{
+  "general": {
+    "skip_to_content": "Skip to content",
+    "password_page": {
+      "login_form_heading": "Enter store using password",
+      "login_form_password_label": "Password",
+      "login_form_submit": "Enter",
+      "opening_soon": "Opening soon"
+    }
+  },
+  "shopify": {
+    "checkout": {
+      "general": {}
+    }
+  }
+}

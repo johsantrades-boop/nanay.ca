@@ -1,0 +1,25 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": { "text": "Text (604) 652-1930 for any questions! 💗", "link": "" }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "cat-feasts": { "type": "category", "settings": { "collection": "feature", "label": "Party feasts (15–100)" } },
+        "cat-share": { "type": "category", "settings": { "collection": "share", "label": "Feasts to share" } },
+        "cat-solo": { "type": "category", "settings": { "collection": "solo", "label": "Solo meals" } },
+        "cat-byof": { "type": "category", "settings": { "collection": "byof", "label": "Build your own feast" } },
+        "cat-buckets": { "type": "category", "settings": { "collection": "inihaw-buckets", "label": "Inihaw buckets" } },
+        "cat-frozen": { "type": "category", "settings": { "collection": "raw", "label": "Frozen, ready to grill" } },
+        "cat-desserts": { "type": "category", "settings": { "collection": "warehouse", "label": "Desserts" } }
+      },
+      "block_order": ["cat-feasts", "cat-share", "cat-solo", "cat-byof", "cat-buckets", "cat-frozen", "cat-desserts"],
+      "settings": { "menu_label": "Menu", "menu": "main-menu", "cta_label": "Order now", "cta_link": "", "show_search": true, "show_account": true }
+    }
+  },
+  "order": ["announcement", "header"]
+}

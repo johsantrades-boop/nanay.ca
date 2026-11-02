@@ -1,0 +1,82 @@
+{%- comment -%}
+  Solo meals (individual meals, e.g. for work lunches). Shows the products picked in the section,
+  or every product in the chosen collection. Add/remove meals in Shopify admin; prices, photos and
+  sold-out states come straight from the products.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign list = s.collection.products
+  if s.products != blank
+    assign list = s.products
+  endif
+  assign order_body = 'Hi Nanay! I would like to order solo meals for ' | url_encode
+-%}
+<section class="section{% if s.sand %} section--sand{% endif %}" id="solo-meals" aria-labelledby="solo-{{ section.id }}">
+  <div class="container">
+    <div class="solo reveal">
+      <a class="solo__media" href="{{ s.post_url | default: settings.instagram_url }}" target="_blank" rel="noopener">
+        {%- if s.image != blank -%}
+          {{ s.image | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 860px) 40vw, 90vw', loading: 'lazy', alt: s.image_alt }}
+        {%- elsif s.fallback != 'none' -%}
+          <img src="{{ s.fallback | append: '.webp' | asset_url }}" alt="{{ s.image_alt }}" loading="lazy" width="480" height="480">
+        {%- endif -%}
+        <span class="solo__tag">{% render 'icon', name: 'instagram' %}Seen on @nanaykitchen<span class="visually-hidden"> (opens Instagram in a new tab)</span></span>
+      </a>
+      <div class="stack">
+        {%- if s.kicker != blank -%}<p class="kicker">{{ s.kicker }}</p>{%- endif -%}
+        <h2 class="h1" id="solo-{{ section.id }}">{{ s.heading }}</h2>
+        {%- if s.text != blank -%}<div class="rte lead" style="color:var(--text)">{{ s.text }}</div>{%- endif -%}
+        {%- if s.heating != blank -%}
+          <p class="pro-tip">{% render 'icon', name: 'fire' %}<span>{{ s.heating }}</span></p>
+        {%- endif -%}
+        <div class="solo__actions">
+          <a class="btn" href="sms:{{ settings.sms_number }}?&body={{ order_body }}">{% render 'icon', name: 'chat' %}{{ s.button_label }}</a>
+          {%- if list.size > 0 -%}<a class="btn btn--outline" href="#solo-list-{{ section.id }}">See the meals</a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    {%- if list.size > 0 -%}
+      <div class="grid grid--4 solo__grid" id="solo-list-{{ section.id }}">
+        {%- for product in list limit: 12 -%}
+          {%- liquid
+            assign card_fallback = s.card_fallback
+            if card_fallback == 'none'
+              assign card_fallback = ''
+            endif
+          -%}
+          {% render 'product-card', product: product, show_desc: true, eager: false, fallback: card_fallback %}
+        {%- endfor -%}
+      </div>
+    {%- elsif request.design_mode -%}
+      <p class="note solo__empty">No meals to show yet. Pick products above, or choose a collection (for example "Solo meals"). Customers only see the text and the "Text to order" button until then.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Solo meals",
+  "class": "section-solo",
+  "settings": [
+    { "type": "header", "content": "Meals" },
+    { "type": "product_list", "id": "products", "label": "Meals to show", "limit": 12, "info": "Pick the solo meal products. Leave empty to use the collection below." },
+    { "type": "collection", "id": "collection", "label": "Or show a collection", "info": "Create a collection such as \"Solo meals\" and add meals to it in Products > Collections." },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "kicker", "label": "Small line", "default": "New · Solo meals" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Lunch for one" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Solo meals are available for work lunches. Order online, or text us your order.</p>" },
+    { "type": "text", "id": "heating", "label": "Heating or storage note", "info": "Optional, e.g. whether the meals are frozen and how to reheat them." },
+    { "type": "text", "id": "button_label", "label": "Text-to-order button", "default": "Text to order" },
+    { "type": "header", "content": "Photo" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "select", "id": "fallback", "label": "Built-in photo (if no image chosen)", "options": [
+      { "value": "ig-06", "label": "Solo meals (Instagram)" }, { "value": "ig-02", "label": "Silog feast (Instagram)" }, { "value": "none", "label": "None" } ], "default": "ig-06" },
+    { "type": "text", "id": "image_alt", "label": "Image description (for screen readers)", "default": "Rows of individual meal containers on a kitchen counter, with the words \"Solo meals available for work lunches\"" },
+    { "type": "select", "id": "card_fallback", "label": "Photo for meals that have no photo yet", "options": [ { "value": "none", "label": "None (compact card without a photo)" }, { "value": "ig-06", "label": "Solo meals (Instagram)" } ], "default": "none", "info": "Upload a photo to each meal in Products and it replaces this." },
+    { "type": "url", "id": "post_url", "label": "Photo links to (e.g. the Instagram post)", "default": "https://www.instagram.com/nanaykitchen/reel/De8KFubCBNJ/" },
+    { "type": "checkbox", "id": "sand", "label": "Sand background", "default": false }
+  ],
+  "presets": [ { "name": "Solo meals" } ]
+}
+{% endschema %}

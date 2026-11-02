@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": { "type": "main-collection", "settings": { "per_page": 24 } },
+    "how": {
+      "type": "how-ordering-works",
+      "blocks": {
+        "h1": { "type": "step", "settings": { "icon": "people", "title": "Pick your feast", "text": "Choose by headcount, or let the feast planner suggest the trays." } },
+        "h2": { "type": "step", "settings": { "icon": "calendar", "title": "Choose your date", "text": "Pick pickup or delivery and the date you need it in the cart." } },
+        "h3": { "type": "step", "settings": { "icon": "chat", "title": "We confirm by text", "text": "Nanay confirms your order and time by text." } }
+      },
+      "block_order": ["h1", "h2", "h3"],
+      "settings": { "kicker": "Easy as 1, 2, 3", "heading": "How ordering works", "show_facts": true }
+    }
+  },
+  "order": ["main", "how"]
+}

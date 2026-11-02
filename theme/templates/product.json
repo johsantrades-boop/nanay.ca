@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "main": { "type": "main-product", "settings": {} },
+    "recs": { "type": "product-recommendations", "settings": { "heading": "Complete the feast", "limit": 4 } }
+  },
+  "order": ["main", "recs"]
+}

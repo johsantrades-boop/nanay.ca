@@ -1,0 +1,14 @@
+<div class="container section stack" style="max-width:520px">
+  <h1 class="h1">Activate your account</h1>
+  <div class="panel">
+    {%- form 'activate_customer_password' -%}
+      {%- if form.errors -%}<div class="form-msg form-msg--err" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+      <div class="form-grid">
+        <div class="field"><label for="act-pw">Password</label><input class="input" id="act-pw" type="password" name="customer[password]" autocomplete="new-password" required></div>
+        <div class="field"><label for="act-pw2">Confirm password</label><input class="input" id="act-pw2" type="password" name="customer[password_confirmation]" autocomplete="new-password" required></div>
+        <button class="btn btn--block" type="submit">Activate account</button>
+        <button class="btn btn--outline btn--block" type="submit" name="decline">Decline</button>
+      </div>
+    {%- endform -%}
+  </div>
+</div>

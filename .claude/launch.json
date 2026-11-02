@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "nanay-site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve@14.2.4", "site", "-l", "4173", "--no-clipboard"],
+      "port": 4173
+    },
+    {
+      "name": "nanay-app",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["app/server.mjs"],
+      "port": 4180
+    },
+    {
+      "name": "nanay-theme-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["tools/preview/server.mjs"],
+      "port": 4174
+    }
+  ]
+}

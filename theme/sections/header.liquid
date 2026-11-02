@@ -1,0 +1,165 @@
+﻿{%- liquid
+  assign menu_page_url = pages['menu'].url | default: routes.all_products_collection_url
+  assign nav = section.settings.menu.links
+  assign category_blocks = section.blocks | where: 'type', 'category'
+  assign fallback_handles = 'catering,how-to-order,about,contact' | split: ','
+-%}
+<header class="site-header" id="site-header" {{ section.shopify_attributes }}>
+  <div class="container header__inner">
+    <button class="icon-btn menu-toggle" type="button" aria-controls="menu-drawer" aria-expanded="false" data-open="menu-drawer">
+      {% render 'icon', name: 'menu' %}<span class="visually-hidden">Open menu</span>
+    </button>
+
+    <a class="logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+      {%- if settings.logo != blank -%}
+        {{ settings.logo | image_url: height: 128 | image_tag: alt: shop.name, style: 'height: var(--logo-h)', loading: 'eager' }}
+      {%- else -%}
+        <span class="logo__word">NANAY</span>
+        <span class="logo__sub">FILIPINO COMFORT FOOD</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      <ul class="nav__list">
+        {%- if category_blocks.size > 0 -%}
+          <li class="nav__item">
+            <button class="nav__link" type="button" aria-expanded="false" aria-controls="nav-menu-dd" data-dropdown>
+              {{ section.settings.menu_label }}{% render 'icon', name: 'chevron-down' %}
+            </button>
+            <ul class="nav__dropdown" id="nav-menu-dd">
+              <li><a href="{{ menu_page_url }}">See the full menu</a></li>
+              {%- for block in category_blocks -%}
+                {%- assign c = block.settings.collection -%}
+                {%- if c != blank -%}
+                  <li {{ block.shopify_attributes }}><a href="{{ menu_page_url }}#{{ c.handle }}">{{ block.settings.label | default: c.title }}<span class="muted small">{{ c.products_count }}</span></a></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </li>
+        {%- endif -%}
+
+        {%- if nav.size > 0 -%}
+          {%- for link in nav -%}
+            {%- if link.links.size > 0 -%}
+              <li class="nav__item">
+                <button class="nav__link" type="button" aria-expanded="false" aria-controls="nav-dd-{{ forloop.index }}" data-dropdown>
+                  {{ link.title }}{% render 'icon', name: 'chevron-down' %}
+                </button>
+                <ul class="nav__dropdown" id="nav-dd-{{ forloop.index }}">
+                  {%- for child in link.links -%}
+                    <li><a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </li>
+            {%- else -%}
+              <li><a class="nav__link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- comment -%} Fallback until a navigation menu is set in Online Store > Navigation {%- endcomment -%}
+          {%- for h in fallback_handles -%}
+            {%- assign p = pages[h] -%}
+            {%- if p != blank -%}
+              <li><a class="nav__link" href="{{ p.url }}"{% if page.handle == p.handle %} aria-current="page"{% endif %}>{{ p.title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      {%- if section.settings.show_search -%}
+        <a class="icon-btn" href="{{ routes.search_url }}">{% render 'icon', name: 'search' %}<span class="visually-hidden">Search</span></a>
+      {%- endif -%}
+      {%- if shop.customer_accounts_enabled and section.settings.show_account -%}
+        <a class="icon-btn" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">{% render 'icon', name: 'user' %}<span class="visually-hidden">{% if customer %}Account{% else %}Log in{% endif %}</span></a>
+      {%- endif -%}
+      <a class="icon-btn" href="{{ routes.cart_url }}" data-open="cart-drawer" aria-controls="cart-drawer">
+        {% render 'icon', name: 'cart' %}<span class="visually-hidden">Cart</span>
+        <span class="cart-count" data-cart-count data-count="{{ cart.item_count }}">{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span>
+      </a>
+      {%- if section.settings.cta_label != blank -%}
+        <a class="btn btn--sm header__cta" href="{{ section.settings.cta_link | default: menu_page_url }}">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</header>
+
+<div class="drawer drawer--left" id="menu-drawer" aria-hidden="true">
+  <button class="drawer__scrim" type="button" data-close tabindex="-1" aria-label="Close menu"></button>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer__head">
+      <span class="drawer__title">Nanay</span>
+      <button class="icon-btn" type="button" data-close>{% render 'icon', name: 'close' %}<span class="visually-hidden">Close menu</span></button>
+    </div>
+    <div class="drawer__body">
+      <ul class="mnav">
+        {%- if category_blocks.size > 0 -%}
+          <li>
+            <details open>
+              <summary>{{ section.settings.menu_label }}</summary>
+              <ul>
+                <li><a href="{{ menu_page_url }}" data-close>See the full menu</a></li>
+                {%- for block in category_blocks -%}
+                  {%- assign c = block.settings.collection -%}
+                  {%- if c != blank -%}
+                    <li><a href="{{ menu_page_url }}#{{ c.handle }}" data-close>{{ block.settings.label | default: c.title }}</a></li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </details>
+          </li>
+        {%- endif -%}
+        {%- if nav.size > 0 -%}
+          {%- for link in nav -%}
+            {%- if link.links.size > 0 -%}
+              <li><details><summary>{{ link.title }}</summary><ul>
+                {%- for child in link.links -%}<li><a href="{{ child.url }}">{{ child.title }}</a></li>{%- endfor -%}
+              </ul></details></li>
+            {%- else -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for h in fallback_handles -%}
+            {%- assign p = pages[h] -%}
+            {%- if p != blank -%}<li><a href="{{ p.url }}">{{ p.title }}</a></li>{%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+        {%- if shop.customer_accounts_enabled -%}
+          <li><a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">{% if customer %}My account{% else %}Log in{% endif %}</a></li>
+        {%- endif -%}
+      </ul>
+      <div class="mnav-contact">
+        <a class="btn btn--block" href="{{ menu_page_url }}">Order now</a>
+        <a class="btn btn--outline btn--block" href="sms:{{ settings.sms_number }}">{% render 'icon', name: 'chat' %}Text {{ settings.phone_display }}</a>
+        <p>{{ settings.hours }} · Pickup: {{ settings.pickup_name }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    { "type": "text", "id": "menu_label", "label": "Menu dropdown label", "default": "Menu" },
+    { "type": "link_list", "id": "menu", "label": "Navigation menu", "default": "main-menu", "info": "Edit links in Online Store > Navigation. If it is empty, links to the Catering, How to order, About and Contact pages are shown." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Order now" },
+    { "type": "url", "id": "cta_link", "label": "Button link", "info": "Empty = the Menu page." },
+    { "type": "checkbox", "id": "show_search", "label": "Show search", "default": true },
+    { "type": "checkbox", "id": "show_account", "label": "Show account icon", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Menu category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Label", "info": "Empty = collection title." }
+      ]
+    }
+  ]
+}
+{% endschema %}

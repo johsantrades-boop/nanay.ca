@@ -1,0 +1,76 @@
+{%- comment -%}
+  Instagram strip. Each "Post" block is one tile: upload the photo (or use a built-in one) and paste the post link.
+  Instagram no longer offers a free automatic feed for themes, so tiles are chosen by hand in the theme editor.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="section{% if s.sand %} section--sand{% endif %}" aria-labelledby="ig-{{ section.id }}">
+  <div class="container">
+    <div class="ig-head reveal">
+      <div class="stack-sm">
+        <p class="kicker">{% render 'icon', name: 'instagram' %}{{ s.kicker }}</p>
+        <h2 class="h2" id="ig-{{ section.id }}">{{ s.heading }}</h2>
+      </div>
+      {%- if settings.instagram_url != blank -%}
+        <a class="btn btn--outline" href="{{ settings.instagram_url }}" target="_blank" rel="noopener">{{ s.button_label }}<span class="visually-hidden"> (opens in a new tab)</span></a>
+      {%- endif -%}
+    </div>
+    <ul class="ig-grid" role="list">
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        {%- if b.image == blank and b.fallback == 'none' -%}{%- continue -%}{%- endif -%}
+        <li class="ig-tile" {{ block.shopify_attributes }}>
+          <a href="{{ b.url | default: settings.instagram_url }}" target="_blank" rel="noopener">
+            {%- if b.image != blank -%}
+              {{ b.image | image_url: width: 480 | image_tag: widths: '240, 360, 480', sizes: '(min-width: 1000px) 16vw, (min-width: 600px) 30vw, 45vw', loading: 'lazy', alt: b.alt }}
+            {%- else -%}
+              <img src="{{ b.fallback | append: '.webp' | asset_url }}" alt="{{ b.alt }}" loading="lazy" width="480" height="480">
+            {%- endif -%}
+            {%- if b.video -%}<span class="ig-tile__play" aria-hidden="true">{% render 'icon', name: 'play' %}</span>{%- endif -%}
+            <span class="visually-hidden">{% if b.video %}Watch{% else %}View{% endif %} on Instagram (opens in a new tab)</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram strip",
+  "class": "section-instagram",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Small line", "default": "@nanaykitchen" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Fresh from the kitchen" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Follow on Instagram" },
+    { "type": "checkbox", "id": "sand", "label": "Sand background", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "post",
+      "name": "Post",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo", "info": "Square works best (at least 480 × 480)." },
+        { "type": "select", "id": "fallback", "label": "Built-in photo (if no photo chosen)", "options": [
+          { "value": "ig-01", "label": "Order: Feast for 50, Party Feast, Tofu Sisig, Pancit Canton" },
+          { "value": "ig-02", "label": "Silog feast tray" },
+          { "value": "ig-03", "label": "Skewers on the grill" },
+          { "value": "ig-04", "label": "Feast for 50" },
+          { "value": "ig-05", "label": "Spend the day with us" },
+          { "value": "ig-06", "label": "Solo meals for work lunches" },
+          { "value": "ig-07", "label": "Packing a liempo tray" },
+          { "value": "ig-08", "label": "Coquitlam & Burnaby delivery" },
+          { "value": "ig-09", "label": "Behind the scenes: Fiesta Feast" },
+          { "value": "ig-10", "label": "Silog Feast" },
+          { "value": "ig-11", "label": "A day in the life" },
+          { "value": "ig-12", "label": "What's in a Feast for 50" },
+          { "value": "none", "label": "None" } ], "default": "none" },
+        { "type": "url", "id": "url", "label": "Instagram post link" },
+        { "type": "text", "id": "alt", "label": "Photo description (for screen readers)" },
+        { "type": "checkbox", "id": "video", "label": "It's a video (shows a play icon)", "default": false }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Instagram strip" } ]
+}
+{% endschema %}

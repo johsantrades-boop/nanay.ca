@@ -1,0 +1,20 @@
+<section class="section section--tight">
+  <div class="container">
+    <div class="contact-cards">
+      <a class="contact-card" href="sms:{{ settings.sms_number }}">{% render 'icon', name: 'chat' %}<span><b>Text to order</b>{{ settings.phone_display }} · fastest reply</span></a>
+      <a class="contact-card" href="tel:{{ settings.sms_number }}">{% render 'icon', name: 'phone' %}<span><b>Call</b>{{ settings.phone_display }}</span></a>
+      <a class="contact-card" href="mailto:{{ settings.email }}">{% render 'icon', name: 'mail' %}<span><b>Email</b>{{ settings.email }}</span></a>
+      {%- if settings.instagram_url != blank -%}<a class="contact-card" href="{{ settings.instagram_url }}" target="_blank" rel="noopener">{% render 'icon', name: 'instagram' %}<span><b>Instagram</b>@nanaykitchen · daily specials</span></a>{%- endif -%}
+      <div class="contact-card">{% render 'icon', name: 'clock' %}<span><b>Hours</b>{{ settings.hours }}</span></div>
+      {%- if settings.map_url != blank -%}
+        <a class="contact-card" href="{{ settings.map_url }}" target="_blank" rel="noopener">{% render 'icon', name: 'pin' %}<span><b>Pickup</b>{{ settings.pickup_name }}{% if settings.pickup_address != blank %}, {{ settings.pickup_address }}{% endif %} · Open in Maps</span></a>
+      {%- else -%}
+        <div class="contact-card">{% render 'icon', name: 'pin' %}<span><b>Pickup</b>{{ settings.pickup_name }}{% if settings.pickup_address != blank %}, {{ settings.pickup_address }}{% endif %}, {{ settings.city }}</span></div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Contact details", "settings": [], "presets": [ { "name": "Contact details" } ] }
+{% endschema %}

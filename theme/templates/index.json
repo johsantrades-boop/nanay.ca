@@ -1,0 +1,200 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-video",
+      "settings": {
+        "show_bundled_video": true,
+        "kicker": "Filipino comfort food · Langley, BC",
+        "heading": "Nanay",
+        "subheading": "Fresh off the wok, grill, and fire! Party trays, charcoal-grilled inihaw and silogs, made to feed your people.",
+        "button_1_label": "Order a feast",
+        "button_1_link": "shopify://pages/menu",
+        "button_2_label": "Catering & events",
+        "button_2_link": "shopify://pages/catering",
+        "show_meta": true
+      }
+    },
+    "feeds": {
+      "type": "feeds-how-many",
+      "blocks": {
+        "s4": { "type": "size", "settings": { "product": "mini-inihaw-bbq-grilled-feast", "serves": "4", "unit": "people", "title": "Mini Inihaw Feast", "text": "Your choice of 2 meat options: Chicken Inasal, Grilled Liempo or BBQ Pork Skewers, on a bed of steamed white rice, with Nanay Vinegar." } },
+        "s6": { "type": "size", "settings": { "product": "inihaw-feast", "serves": "6–8", "unit": "people", "title": "Inihaw Feast", "text": "Choice of 2 grilled meats, steamed white rice or garlic fried rice, and garlic vinegar." } },
+        "s15": { "type": "size", "settings": { "product": "party-feast-good-for-12-13-people", "serves": "15", "unit": "people", "title": "Party Feast", "text": "Steamed rice, palabok or Filipino style spaghetti, a half/half meat tray and a grilled meat tray." } },
+        "s30": { "type": "size", "settings": { "product": "fiesta-feast-good-for-30-35-people", "serves": "30–35", "unit": "people", "title": "Fiesta Feast", "text": "Steamed rice x 2, palabok, Filipino style spaghetti and your choice of THREE inihaw meat trays." } },
+        "s50": { "type": "size", "settings": { "product": "feast-for-50", "photo_index": 2, "serves": "50", "unit": "people", "title": "Feast for 50", "text": "Full size rice, palabok, spaghetti, liempo, chicken inasal, 50 BBQ pork skewers and Nanay Vinegar." } },
+        "s100": { "type": "size", "settings": { "product": "fiesta-festival-good-for-100", "photo_index": 3, "serves": "100", "unit": "guests", "title": "Fiesta Festival", "text": "Everything for the big day: 4 full size rice, 2 palabok, 2 spaghetti, 2 liempo, 2 chicken inasal and 100 BBQ pork skewers." } }
+      },
+      "block_order": ["s4", "s6", "s15", "s30", "s50", "s100"],
+      "settings": {
+        "kicker": "Sized for your crowd",
+        "heading": "Feeds how many?",
+        "text": "From a family dinner for 4 to a fiesta for 100. Pick your size, and Nanay takes care of the rest.",
+        "link_label": "Not sure? Use the feast planner",
+        "link": "",
+        "sand": false
+      }
+    },
+    "planner": {
+      "type": "feast-planner",
+      "blocks": {
+        "p15": { "type": "package", "settings": { "product": "party-feast-good-for-12-13-people", "serves": 15, "style": "party", "title": "Party Feast", "note": "good for 15" } },
+        "p30": { "type": "package", "settings": { "product": "fiesta-feast-good-for-30-35-people", "serves": 30, "style": "party", "title": "Fiesta Feast", "note": "good for 30–35" } },
+        "p50": { "type": "package", "settings": { "product": "feast-for-50", "serves": 50, "style": "party", "title": "Feast for 50", "note": "good for 50" } },
+        "p100": { "type": "package", "settings": { "product": "fiesta-festival-good-for-100", "serves": 100, "style": "party", "title": "Fiesta Festival", "note": "good for 100" } },
+        "i4": { "type": "package", "settings": { "product": "mini-inihaw-bbq-grilled-feast", "serves": 4, "style": "inihaw", "title": "Mini Inihaw Feast", "note": "good for 4" } },
+        "i6": { "type": "package", "settings": { "product": "inihaw-feast", "serves": 6, "style": "inihaw", "title": "Inihaw Feast", "note": "good for 6–8" } },
+        "g4": { "type": "package", "settings": { "product": "mother-s-day-weekend-silogs", "variant": "Mini Silog Feast", "serves": 4, "style": "silog", "title": "Mini Silog Feast", "note": "good for 4" } },
+        "g6": { "type": "package", "settings": { "product": "mother-s-day-weekend-silogs", "variant": "Silog Feast", "serves": 6, "style": "silog", "title": "Silog Feast", "note": "good for 6–8" } }
+      },
+      "block_order": ["p15", "p30", "p50", "p100", "i4", "i6", "g4", "g6"],
+      "settings": {
+        "kicker": "Feast planner",
+        "heading": "Tell us your headcount",
+        "text": "We'll suggest the best-fitting feasts from the menu and what it works out to per person. Then text it to us, or add it to your cart.",
+        "default_guests": 25,
+        "extras": "byof",
+        "dessert": "ube-halaya",
+        "dessert_label": "Add dessert (Ube Halaya or Leche Flan)",
+        "dessert_note": "10 x 8 oz · good for about 20-30 people",
+        "dessert_serves": 30,
+        "note": "Planned from the low end of each 'good for' range, so nobody goes hungry.",
+        "sand": true
+      }
+    },
+    "meaning": {
+      "type": "meaning",
+      "settings": {
+        "word": "Nanay",
+        "definition": "mother in Tagalog, or an affectionate or honorific term for an older woman",
+        "mission": "Our mission is to share the most comforting and nostalgic Filipino food. We source only high quality ingredients locally through other small businesses and farmers in BC to prepare and cook with love."
+      }
+    },
+    "silog": {
+      "type": "media-text",
+      "blocks": {
+        "tip": { "type": "tip", "settings": { "icon": "egg", "text": "PRO-TIP: ask us for crispy fried wok eggs" } }
+      },
+      "block_order": ["tip"],
+      "settings": {
+        "fallback": "photo-silog",
+        "image_alt": "Silog feast: garlic fried rice topped with fried eggs, with tapa, longganisa and fried bangus",
+        "tag": "Silog Feast",
+        "flip": false,
+        "sand": false,
+        "kicker": "Sinangag + Itlog",
+        "heading": "Silogs, better throughout the day",
+        "text": "<p>Silogs are the staple to Filipino breakfast. But better throughout the day. Very comforting, tastes nostalgic, and feels like home. We fry our signature garlic fried rice in a wok for added smokiness and aroma. Paired with your choice of grilled meats, fried fish, or roasted eggplant. Topped with an egg, fresh green onions, and in-house made garlic bits.</p>",
+        "button_label": "Order a Silog Feast",
+        "button_link": "shopify://products/mother-s-day-weekend-silogs"
+      }
+    },
+    "inihaw": {
+      "type": "media-text",
+      "blocks": {
+        "t1": { "type": "line", "settings": { "text": "<p><strong>Toyomansi:</strong> Soy sauce and calamansi dipping sauce for the Inihaw Feasts. Pour it all over your rice too!</p>" } }
+      },
+      "block_order": ["t1"],
+      "settings": {
+        "fallback": "photo-inihaw",
+        "image_alt": "Trays of charcoal-grilled chicken inasal, pork belly and BBQ pork skewers on banana leaves with calamansi",
+        "tag": "Grilled over charcoal",
+        "flip": true,
+        "sand": true,
+        "kicker": "Inihaw (BBQ) Feasts",
+        "heading": "Fresh off the grill and fire",
+        "text": "<p>Filipino authentic grilled meats served over our signature garlic fried rice. “The Skewers” are tender pork marinated in a sweet and savoury Filipino bbq sauce. “Chicken Inasal” is boneless chicken legs (thighs and drumsticks) marinated in soy, garlic, ginger, lemongrass grilled over charcoal.</p>",
+        "button_label": "See the Inihaw Feast",
+        "button_link": "shopify://products/inihaw-feast"
+      }
+    },
+    "tabs": {
+      "type": "collection-tabs",
+      "blocks": {
+        "t1": { "type": "tab", "settings": { "collection": "feature", "label": "For parties and handaan" } },
+        "t2": { "type": "tab", "settings": { "collection": "share", "label": "Feasts" } },
+        "t3": { "type": "tab", "settings": { "collection": "byof", "label": "Build your own party feast" } },
+        "t4": { "type": "tab", "settings": { "collection": "inihaw-buckets", "label": "Inihaw buckets", "note": "For picnics and camping. Ready to grill." } },
+        "t5": { "type": "tab", "settings": { "collection": "raw", "label": "Frozen goods" } },
+        "t6": { "type": "tab", "settings": { "collection": "warehouse", "label": "Sweets but not too sweet" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4", "t5", "t6"],
+      "settings": { "kicker": "The menu", "heading": "Something for every table", "limit": 8, "sand": false }
+    },
+    "solo": {
+      "type": "solo-meals",
+      "settings": {
+        "products": ["solo-silog", "solo-shrimp"],
+        "collection": "solo",
+        "kicker": "New · Solo meals",
+        "heading": "Lunch for one",
+        "text": "<p>Solo meals are available for work lunches. Order online, or text us your order.</p>",
+        "button_label": "Text to order",
+        "fallback": "ig-06",
+        "post_url": "https://www.instagram.com/nanaykitchen/reel/De8KFubCBNJ/",
+        "sand": true
+      }
+    },
+    "instagram": {
+      "type": "instagram-feed",
+      "blocks": {
+        "p1": { "type": "post", "settings": { "fallback": "ig-10", "url": "https://www.instagram.com/nanaykitchen/reel/Dek4qrHiZIG/", "alt": "Nanay's Silog Feast: longganisa, tapa and bangus over garlic fried rice", "video": true } },
+        "p2": { "type": "post", "settings": { "fallback": "ig-07", "url": "https://www.instagram.com/nanaykitchen/reel/De2_FLIiTLj/", "alt": "Packing a grilled liempo tray in Nanay's kitchen", "video": true } },
+        "p3": { "type": "post", "settings": { "fallback": "ig-04", "url": "https://www.instagram.com/nanaykitchen/reel/DfBQl5RC3UD/", "alt": "A Feast for 50: trays of palabok, spaghetti, liempo and chicken inasal", "video": true } },
+        "p4": { "type": "post", "settings": { "fallback": "ig-09", "url": "https://www.instagram.com/nanaykitchen/reel/Denr6IUiKPw/", "alt": "Behind the scenes: one of the cooks holding a tray of palabok for a Fiesta Feast", "video": true } },
+        "p5": { "type": "post", "settings": { "fallback": "ig-02", "url": "https://www.instagram.com/nanaykitchen/p/DX0jQNqm21d/", "alt": "A silog tray of fried eggs, beef tapa and longganisa", "video": false } },
+        "p6": { "type": "post", "settings": { "fallback": "ig-12", "url": "https://www.instagram.com/nanaykitchen/reel/DefuGPNAfKj/", "alt": "Trays of BBQ pork skewers on banana leaves for a Feast for 50", "video": true } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6"],
+      "settings": { "kicker": "@nanaykitchen", "heading": "Fresh from the kitchen", "button_label": "Follow on Instagram", "sand": false }
+    },
+    "why": {
+      "type": "why-nanay",
+      "blocks": {
+        "w1": { "type": "point", "settings": { "title": "Local, small-business ingredients", "text": "We source only high quality ingredients locally through other small businesses and farmers in BC." } },
+        "w2": { "type": "point", "settings": { "title": "Free-range eggs", "text": "Our silogs and palabok use free-range eggs from Coligny Creek Co." } },
+        "w3": { "type": "point", "settings": { "title": "Grilled over charcoal", "text": "Chicken inasal, liempo and skewers are marinated in-house and grilled over charcoal, then topped with housemade garlic bits." } }
+      },
+      "block_order": ["w1", "w2", "w3"],
+      "settings": { "kicker": "Why Nanay", "heading": "Cooked with love, the way it should be", "sand": false }
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "title": "Great for parties!", "text": "The food was great! If you’re looking for pinoy food to serve in your party, Nanay is a great choice. Hindi ka mapapahiya sa bisita. Our visitors loved it! Everything tastes good. They delivered the food in time and the food was packaged very nicely. Highly recommended 👍", "name": "Vero R." } },
+        "r2": { "type": "review", "settings": { "title": "Great food and service!", "text": "I ordered the fiesta feast and added an extra tray of skewers for my birthday party. All the guests said the food was amazing and I agreed! Not only was the food delicious, the service was exceptional! I added delivery to Vancouver and they arrived ahead of schedule. I look forward to ordering from Nanay Kitchen again. Thank you for the outstanding food and service! Maraming salamat.", "name": "Julian E." } },
+        "r3": { "type": "review", "settings": { "title": "The best silogs!!!", "text": "It was very flavorful! Every part of it, the meat, the egg and even the rice!", "name": "Jackie T." } },
+        "r4": { "type": "review", "settings": { "title": "", "text": "We ordered the silog feast and added an extra meat. All three choices were delicious, the eggs were cooked perfectly and the homemade seasoned vinegar brought a great brightness to the whole plate. Will order again for sure!", "name": "Vivian H." } },
+        "r5": { "type": "review", "settings": { "title": "", "text": "Bought this for my in-laws and the plates were cleaned. Great silog combos for everyone", "name": "Shawn G." } },
+        "r6": { "type": "review", "settings": { "title": "", "text": "Overall great experience - free delivery, friendly service, silog and meats were delicious.", "name": "Madelene T." } },
+        "r7": { "type": "review", "settings": { "title": "", "text": "The Best Ever!!!! We all loved it!!!", "name": "Eleanor C." } },
+        "r8": { "type": "review", "settings": { "title": "", "text": "Nothing short of amazing", "name": "Joshua M." } },
+        "r9": { "type": "review", "settings": { "title": "", "text": "Always hits the spot.", "name": "James M." } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9"],
+      "settings": { "heading": "Reviews", "text": "Plates cleaned, guests happy, hosts looking good." }
+    },
+    "how": {
+      "type": "how-ordering-works",
+      "blocks": {
+        "h1": { "type": "step", "settings": { "icon": "people", "title": "Pick your feast", "text": "Choose by headcount, or let the feast planner suggest the trays." } },
+        "h2": { "type": "step", "settings": { "icon": "calendar", "title": "Choose your date", "text": "Pick pickup or delivery and the date you need it in the cart. Order ahead, especially for 50+." } },
+        "h3": { "type": "step", "settings": { "icon": "chat", "title": "We confirm by text", "text": "Nanay confirms your order and time by text. Questions? Text (604) 652-1930 anytime." } }
+      },
+      "block_order": ["h1", "h2", "h3"],
+      "settings": { "kicker": "Easy as 1, 2, 3", "heading": "How ordering works", "show_facts": true }
+    },
+    "cta": {
+      "type": "cta-band",
+      "settings": {
+        "fallback": "photo-catering",
+        "kicker": "For parties and handaan",
+        "heading": "Feeding 30, 50 or 100?",
+        "text": "Birthdays, weddings, office lunches and fiestas. Tell us the date and headcount and we'll plan the trays.",
+        "button_1_label": "Plan your catering",
+        "button_1_link": "shopify://pages/catering",
+        "show_text_button": true
+      }
+    }
+  },
+  "order": ["hero", "feeds", "planner", "meaning", "silog", "inihaw", "tabs", "solo", "why", "reviews", "instagram", "how", "cta"]
+}

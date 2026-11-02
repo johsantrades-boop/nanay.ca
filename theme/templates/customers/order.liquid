@@ -1,0 +1,23 @@
+<div class="container section stack" style="max-width:860px">
+  <p class="breadcrumbs"><a href="{{ routes.account_url }}">Account</a> / Order {{ order.name }}</p>
+  <h1 class="h1">Order {{ order.name }}</h1>
+  <p class="muted">Placed {{ order.created_at | date: '%B %e, %Y' }}{% if order.cancelled %} · Cancelled{% endif %}</p>
+  {%- if order.attributes.size > 0 -%}
+    <div class="info-card">
+      {%- for a in order.attributes -%}{%- if a.last != blank -%}<p><b>{{ a.first }}:</b> {{ a.last }}</p>{%- endif -%}{%- endfor -%}
+    </div>
+  {%- endif -%}
+  <div class="panel">
+    <ul class="cart-items">
+      {%- for item in order.line_items -%}
+        <li class="cart-item" style="grid-template-columns:1fr auto">
+          <div><a class="cart-item__title" href="{{ item.product.url }}">{{ item.title }}</a><p class="cart-item__opts">Qty {{ item.quantity }}</p></div>
+          <p class="cart-item__price price">{{ item.final_line_price | money }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+    <div class="cart-sub" style="margin-top:16px"><span>Total</span><span class="price">{{ order.total_price | money }}</span></div>
+  </div>
+  {%- if order.shipping_address -%}<div class="panel"><h2 class="h3">Delivery address</h2>{{ order.shipping_address | format_address }}</div>{%- endif -%}
+  <a class="btn btn--outline" href="sms:{{ settings.sms_number }}?&body={{ 'Hi Nanay! A question about order ' | append: order.name | url_encode }}">{% render 'icon', name: 'chat' %}Text Nanay about this order</a>
+</div>

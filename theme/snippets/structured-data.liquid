@@ -1,0 +1,59 @@
+{%- comment -%} Business details for Google (from Theme settings → Business info), plus product data on product pages. {%- endcomment -%}
+{%- liquid
+  assign same_as = ''
+  if settings.instagram_url != blank
+    assign same_as = same_as | append: settings.instagram_url | append: '|'
+  endif
+  if settings.threads_url != blank
+    assign same_as = same_as | append: settings.threads_url | append: '|'
+  endif
+  if settings.facebook_url != blank
+    assign same_as = same_as | append: settings.facebook_url | append: '|'
+  endif
+  assign same_as = same_as | split: '|'
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FoodEstablishment",
+  "name": {{ shop.name | json }},
+  "description": {{ settings.seo_description | json }},
+  "url": {{ shop.url | json }},
+  "servesCuisine": "Filipino",
+  "priceRange": "$$",
+  "telephone": {{ settings.sms_number | json }},
+  "email": {{ settings.email | json }},
+  "image": {{ 'hero-broll-poster.jpg' | asset_url | prepend: 'https:' | json }},
+  "address": {
+    "@type": "PostalAddress",
+    {%- if settings.pickup_address != blank %}"streetAddress": {{ settings.pickup_address | json }},{% endif %}
+    "addressLocality": "Langley",
+    "addressRegion": "BC",
+    "addressCountry": "CA"
+  },
+  "openingHours": {{ settings.hours_schema | json }},
+  "hasMenu": {{ shop.url | append: '/pages/menu' | json }},
+  "acceptsReservations": false,
+  "sameAs": {{ same_as | json }}
+}
+</script>
+{%- if request.page_type == 'product' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | truncate: 500 | json }},
+  {%- if product.featured_image %}"image": {{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }},{% endif %}
+  "brand": { "@type": "Brand", "name": {{ shop.name | json }} },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "lowPrice": {{ product.price_min | divided_by: 100.0 | json }},
+    "highPrice": {{ product.price_max | divided_by: 100.0 | json }},
+    "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+    "url": {{ shop.url | append: product.url | json }}
+  }
+}
+</script>
+{%- endif -%}

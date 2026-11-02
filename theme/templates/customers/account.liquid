@@ -1,0 +1,34 @@
+<div class="container section stack">
+  <div class="menu-group__head">
+    <h1 class="h1">Kumusta, {{ customer.first_name | default: 'friend' }}!</h1>
+    <a class="btn btn--outline btn--sm" href="{{ routes.account_logout_url }}">Log out</a>
+  </div>
+  <div class="cart-page" style="padding:0">
+    <div class="panel">
+      <h2 class="h3" style="margin-bottom:14px">Your orders</h2>
+      {%- paginate customer.orders by 20 -%}
+        {%- if customer.orders.size > 0 -%}
+          <ul class="cart-items">
+            {%- for order in customer.orders -%}
+              <li class="cart-item" style="grid-template-columns:1fr auto">
+                <div>
+                  <a class="cart-item__title" href="{{ order.customer_url }}">Order {{ order.name }}</a>
+                  <p class="cart-item__opts">{{ order.created_at | date: '%b %e, %Y' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</p>
+                </div>
+                <p class="cart-item__price price">{{ order.total_price | money }}</p>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- else -%}
+          <p class="muted">No orders yet. <a href="{{ pages['menu'].url | default: routes.all_products_collection_url }}">Start with a feast</a>.</p>
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+    <aside class="panel stack">
+      <h2 class="h3">Details</h2>
+      <p>{{ customer.name }}<br>{{ customer.email }}</p>
+      {%- if customer.default_address -%}{{ customer.default_address | format_address }}{%- endif -%}
+      <a class="link-arrow" href="{{ routes.account_addresses_url }}">Manage addresses ({{ customer.addresses_count }})</a>
+    </aside>
+  </div>
+</div>

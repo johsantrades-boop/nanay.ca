@@ -1,0 +1,19 @@
+<section class="page-hero page-hero--sand">
+  <div class="container"><h1 class="h1">Menu categories</h1></div>
+</section>
+<div class="container section--tight">
+  <div class="grid grid--3">
+    {%- for c in collections -%}
+      {%- if c.all_products_count > 0 and c.handle != 'frontpage' -%}
+        <a class="card" href="{{ c.url }}" style="text-decoration:none">
+          <div class="card__img">{%- assign img = c.image | default: c.products.first.featured_media.preview_image -%}{%- if img -%}{{ img | image_url: width: 800 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</div>
+          <div class="card__body"><p class="card__title">{{ c.title }}</p><p class="muted small">{{ c.all_products_count }} items</p></div>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Collections list", "settings": [] }
+{% endschema %}

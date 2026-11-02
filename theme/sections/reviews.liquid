@@ -1,0 +1,43 @@
+{%- capture cards -%}
+  {%- for block in section.blocks -%}
+    <figure class="quote" {{ block.shopify_attributes }}>
+      <p class="quote__stars" aria-label="5 out of 5 stars">★★★★★</p>
+      {%- if block.settings.title != blank -%}<p class="quote__title">{{ block.settings.title }}</p>{%- endif -%}
+      <blockquote class="quote__text" style="margin:0">{{ block.settings.text }}</blockquote>
+      <figcaption class="quote__name">{{ block.settings.name }}</figcaption>
+    </figure>
+  {%- endfor -%}
+{%- endcapture -%}
+<section class="section" aria-labelledby="rev-{{ section.id }}" style="overflow:hidden">
+  <div class="reviews-head">
+    <h2 class="outline-word" id="rev-{{ section.id }}">{{ section.settings.heading }}</h2>
+  </div>
+  {%- if section.settings.text != blank -%}<p class="container lead" style="margin-block:12px 28px">{{ section.settings.text }}</p>{%- endif -%}
+  <div class="marquee" id="marquee-{{ section.id }}" style="--speed: {{ section.blocks.size | times: 9 }}s">
+    <div class="marquee__track">
+      {{ cards }}
+      <div style="display:contents" aria-hidden="true">{{ cards | replace: '<figure class="quote"', '<figure inert class="quote"' }}</div>
+    </div>
+  </div>
+  <div class="container marquee-ctrl">
+    <button class="btn btn--outline btn--sm" type="button" data-marquee-toggle aria-controls="marquee-{{ section.id }}" aria-pressed="false">Pause reviews</button>
+    {%- if settings.google_reviews_url != blank -%}<a class="link-arrow" style="margin-left:16px" href="{{ settings.google_reviews_url }}" target="_blank" rel="noopener">More reviews on Google</a>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Big outlined word", "default": "Reviews" },
+    { "type": "text", "id": "text", "label": "Text" }
+  ],
+  "blocks": [
+    { "type": "review", "name": "Review", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "textarea", "id": "text", "label": "Review" },
+      { "type": "text", "id": "name", "label": "Name" } ] }
+  ],
+  "presets": [ { "name": "Reviews" } ]
+}
+{% endschema %}

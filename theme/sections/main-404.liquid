@@ -1,0 +1,15 @@
+<section class="section">
+  <div class="container cart-empty">
+    <p class="outline-word" style="font-size:clamp(80px,20vw,200px)">404</p>
+    <h1 class="h2">This tray is empty</h1>
+    <p class="muted">The page you're looking for moved or no longer exists.</p>
+    <div class="hero__actions" style="justify-content:center">
+      <a class="btn" href="{{ pages['menu'].url | default: routes.all_products_collection_url }}">See the menu</a>
+      <a class="btn btn--outline" href="{{ routes.root_url }}">Home</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "404", "settings": [] }
+{% endschema %}

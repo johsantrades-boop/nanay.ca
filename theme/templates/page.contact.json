@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "kicker": "Contact",
+        "heading": "Text us anytime",
+        "text": "<p>The fastest way to reach Nanay is a text to (604) 652-1930.</p>",
+        "button_label": "",
+        "show_text_button": true,
+        "fallback": "none",
+        "sand": true
+      }
+    },
+    "info": { "type": "contact-info", "settings": {} },
+    "form": {
+      "type": "enquiry-form",
+      "settings": {
+        "type": "General question",
+        "event_fields": false,
+        "kicker": "Send a message",
+        "heading": "Questions or feedback",
+        "text": "",
+        "placeholder": "How can we help?",
+        "button": "Send message",
+        "success": "Salamat! We got your message and will reply soon.",
+        "sand": false
+      }
+    }
+  },
+  "order": ["hero", "info", "form"]
+}

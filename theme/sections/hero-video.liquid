@@ -1,0 +1,63 @@
+{%- liquid
+  assign s = section.settings
+  assign poster = 'hero-broll-poster.webp' | asset_url
+  if s.poster != blank
+    assign poster = s.poster | image_url: width: 1920
+  endif
+-%}
+<section class="hero" aria-labelledby="hero-title-{{ section.id }}">
+  <div class="hero__media">
+    {%- if s.video != blank -%}
+      {{ s.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '1920x' }}
+    {%- elsif s.show_bundled_video -%}
+      <video data-hero-video autoplay muted loop playsinline preload="metadata" poster="{{ poster }}" aria-hidden="true">
+        <source src="{{ 'hero-broll-720.mp4' | asset_url }}" type="video/mp4">
+      </video>
+    {%- else -%}
+      <img src="{{ poster }}" alt="" fetchpriority="high" width="1920" height="1080">
+    {%- endif -%}
+  </div>
+  <div class="container hero__content">
+    {%- if s.kicker != blank -%}<p class="kicker" style="color:var(--yolk);--i:0" data-in>{{ s.kicker }}</p>{%- endif -%}
+    <h1 class="display hero__title" id="hero-title-{{ section.id }}" data-in style="--i:1">{{ s.heading }}</h1>
+    {%- if s.subheading != blank -%}<p class="hero__sub" data-in style="--i:2">{{ s.subheading }}</p>{%- endif -%}
+    <div class="hero__actions" data-in style="--i:3">
+      {%- if s.button_1_label != blank -%}<a class="btn" href="{{ s.button_1_link | default: routes.all_products_collection_url }}">{{ s.button_1_label }}</a>{%- endif -%}
+      {%- if s.button_2_label != blank -%}<a class="btn btn--outline" href="{{ s.button_2_link | default: routes.root_url }}">{{ s.button_2_label }}</a>{%- endif -%}
+    </div>
+    {%- if s.show_meta -%}
+      <p class="hero__meta" data-in style="--i:4">
+        <span>{% render 'icon', name: 'clock' %}{{ settings.hours }}</span>
+        <span>{% render 'icon', name: 'pin' %}Pickup: {{ settings.pickup_name }}</span>
+        <span>{% render 'icon', name: 'chat' %}<a href="sms:{{ settings.sms_number }}" style="color:inherit">Text {{ settings.phone_display }}</a></span>
+      </p>
+    {%- endif -%}
+  </div>
+  {%- if s.video != blank or s.show_bundled_video -%}
+    {%- capture pause_icon -%}{% render 'icon', name: 'pause' %}{%- endcapture -%}
+    {%- capture play_icon -%}{% render 'icon', name: 'play' %}{%- endcapture -%}
+    <button class="hero__pause" type="button" aria-label="Pause background video" data-pause="{{ pause_icon | escape }}" data-play="{{ play_icon | escape }}">{{ pause_icon }}</button>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Hero video",
+  "tag": "div",
+  "class": "section-hero",
+  "settings": [
+    { "type": "video", "id": "video", "label": "Video (upload in Shopify)", "info": "Optional. Muted loop, 6–15 s. Without one, the bundled B-roll of skewers being prepared, grilled and served is used." },
+    { "type": "checkbox", "id": "show_bundled_video", "label": "Use bundled B-roll when no video is chosen", "default": true },
+    { "type": "image_picker", "id": "poster", "label": "Still image (shown while loading)" },
+    { "type": "text", "id": "kicker", "label": "Small line above heading", "default": "Filipino comfort food · Langley, BC" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Filipino feasts for 4 to 100" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Fresh off the wok, grill, and fire! Party trays, charcoal-grilled inihaw and silogs, made to feed your people." },
+    { "type": "text", "id": "button_1_label", "label": "Main button", "default": "Order a feast" },
+    { "type": "url", "id": "button_1_link", "label": "Main button link" },
+    { "type": "text", "id": "button_2_label", "label": "Second button", "default": "Catering & events" },
+    { "type": "url", "id": "button_2_link", "label": "Second button link" },
+    { "type": "checkbox", "id": "show_meta", "label": "Show hours, pickup and text line", "default": true }
+  ],
+  "presets": [ { "name": "Hero video" } ]
+}
+{% endschema %}

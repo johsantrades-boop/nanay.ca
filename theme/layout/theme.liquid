@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_bg }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 96, height: 96 }}">
+    <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+  {%- endif -%}
+
+  {%- capture seo_title -%}
+    {%- if request.page_type == 'index' -%}{{ shop.name }} | Filipino Party Trays & Catering in {{ settings.city }}
+    {%- else -%}{{ page_title }}{% if current_tags %} – {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} – Page {{ current_page }}{% endif %} | {{ shop.name }}{%- endif -%}
+  {%- endcapture -%}
+  <title>{{ seo_title | strip }}</title>
+  {%- liquid
+    assign seo_description = page_description | default: settings.seo_description
+    if seo_description contains shop.name and seo_description.size < 30
+      assign seo_description = settings.seo_description
+    endif
+  -%}
+  <meta name="description" content="{{ seo_description | strip_html | escape | truncate: 300 }}">
+  {% render 'meta-tags', seo_title: seo_title, seo_description: seo_description %}
+
+  {{ 'lilita-one-latin.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {{ 'hanken-grotesk-latin.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {%- if template.name == 'index' -%}
+    {{ 'cormorant-garamond-600-latin.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {%- endif %}
+
+  <style>
+    :root {
+      --bg: {{ settings.color_bg }}; --surface: {{ settings.color_surface }}; --sand: {{ settings.color_sand }};
+      --text: {{ settings.color_text }}; --muted: {{ settings.color_muted }};
+      --primary: {{ settings.color_primary }}; --primary-hover: {{ settings.color_primary_hover }}; --on-primary: {{ settings.color_on_primary }};
+      --aqua: {{ settings.color_aqua }}; --aqua-ink: {{ settings.color_aqua_ink }}; --yolk: {{ settings.color_yolk }};
+      --border: {{ settings.color_border }}; --border-control: {{ settings.color_border_control }};
+      --logo-h: {{ settings.logo_height }}px;
+    }
+  </style>
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+  {{ content_for_header }}
+
+  {% render 'structured-data' %}
+</head>
+<body class="template-{{ template.name | handle }}{% if template.suffix %} template-{{ template.suffix | handle }}{% endif %}">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  {%- if settings.show_intro and request.page_type == 'index' and request.design_mode == false -%}
+    <div class="intro" id="intro" aria-hidden="true">
+      <div class="logo">
+        <span class="logo__word">NANAY</span>
+        <span class="logo__sub">FILIPINO COMFORT FOOD</span>
+      </div>
+    </div>
+    <script>try { if (sessionStorage.getItem('nanay-intro')) document.getElementById('intro').remove(); else sessionStorage.setItem('nanay-intro', '1'); } catch (e) {}</script>
+  {%- endif -%}
+
+  {% sections 'header-group' %}
+
+  <main id="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {% sections 'footer-group' %}
+
+  {% render 'cart-drawer' %}
+
+  {%- if settings.show_order_bar -%}
+    {%- assign menu_url = pages['menu'].url | default: routes.all_products_collection_url -%}
+    <div class="order-bar" id="order-bar">
+      <a class="btn btn--outline" href="sms:{{ settings.sms_number }}">{% render 'icon', name: 'chat' %}Text us</a>
+      <a class="btn" href="{{ menu_url }}">Order now</a>
+    </div>
+  {%- endif -%}
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    window.Nanay = {
+      routes: { cart: {{ routes.cart_url | json }}, cartAdd: {{ routes.cart_add_url | json }}, cartChange: {{ routes.cart_change_url | json }}, cartUpdate: {{ routes.cart_update_url | json }}, root: {{ routes.root_url | json }} },
+      cartType: {{ settings.cart_type | json }},
+      moneyFormat: {{ shop.money_format | json }},
+      leadDays: {{ settings.lead_days | default: 0 | json }},
+      deliveryMin: {{ settings.delivery_minimum | default: 0 | times: 100 | json }},
+      sms: {{ settings.sms_number | json }}
+    };
+  </script>
+</body>
+</html>

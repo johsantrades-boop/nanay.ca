@@ -1,0 +1,16 @@
+{%- if section.settings.show_title -%}
+  <section class="page-hero page-hero--sand"><div class="container"><h1 class="h1">{{ page.title }}</h1></div></section>
+{%- endif -%}
+{%- if page.content != blank -%}
+  <div class="container section--tight">
+    <div class="rte" style="max-width:72ch;font-size:18px">{{ page.content }}</div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Page content",
+  "settings": [ { "type": "checkbox", "id": "show_title", "label": "Show page title", "default": true } ],
+  "presets": [ { "name": "Page content" } ]
+}
+{% endschema %}

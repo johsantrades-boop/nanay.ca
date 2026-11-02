@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "kicker": "Pickup · Delivery · Text to order",
+        "heading": "How to order",
+        "text": "<p>Order online and choose your date in the cart, or text (604) 652-1930 to order. We confirm every order by text.</p>",
+        "button_label": "Browse the menu",
+        "button_link": "shopify://pages/menu",
+        "show_text_button": true,
+        "fallback": "none",
+        "sand": true
+      }
+    },
+    "how": {
+      "type": "how-ordering-works",
+      "blocks": {
+        "h1": { "type": "step", "settings": { "icon": "people", "title": "Pick your feast", "text": "Choose by headcount on the menu, or use the feast planner." } },
+        "h2": { "type": "step", "settings": { "icon": "calendar", "title": "Choose pickup or delivery", "text": "In the cart, pick pickup or delivery, the date and a preferred time. Add any notes for Nanay." } },
+        "h3": { "type": "step", "settings": { "icon": "chat", "title": "We confirm by text", "text": "Pay at checkout and we'll text to confirm. Questions? Text (604) 652-1930." } }
+      },
+      "block_order": ["h1", "h2", "h3"],
+      "settings": { "kicker": "Easy as 1, 2, 3", "heading": "Three steps", "show_facts": true }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "q", "settings": { "question": "Where and when is pickup?", "answer_source": "hours", "answer": "" } },
+        "q2": { "type": "q", "settings": { "question": "Do you deliver?", "answer_source": "delivery", "answer": "" } },
+        "q3": { "type": "q", "settings": { "question": "Can I order by text?", "answer_source": "none", "answer": "<p>Yes. Text (604) 652-1930 to order. The feast planner can also write the text for you.</p>" } },
+        "q4": { "type": "q", "settings": { "question": "Can I change or cancel my order?", "answer_source": "policy", "answer": "" } },
+        "q5": { "type": "q", "settings": { "question": "How do I cook the frozen packs?", "answer_source": "none", "answer": "<ul><li>Defrost in refrigerator overnight.</li><li>Grill flat on a charcoal grill for best result (propane bbq or stovetop works) on medium-high heat until temperature reaches 75°C (165°F). Chicken inasal 6-8 minutes each side; skewers and liempo 4 minutes each side.</li><li>Enjoy with garlic spiced vinegar and steamed rice.</li></ul>" } },
+        "q6": { "type": "q", "settings": { "question": "Can I combine items from different sections?", "answer_source": "none", "answer": "<p>Yes, everything on the menu can go in one order.</p>" } },
+        "q7": { "type": "q", "settings": { "question": "Do you have vegetarian or gluten-free options?", "answer_source": "none", "answer": "<p>Text us at (604) 652-1930 and we'll tell you what fits. Palabok contains pork and dried shrimp; Filipino style spaghetti contains SPAM.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7"],
+      "settings": { "kicker": "Good to know", "heading": "Ordering questions", "open_first": true, "schema_markup": true, "sand": false }
+    }
+  },
+  "order": ["hero", "how", "faq"]
+}

@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "meaning": {
+      "type": "meaning",
+      "settings": {
+        "word": "Nanay",
+        "definition": "mother in Tagalog, or an affectionate or honorific term for an older woman",
+        "mission": "Our mission is to share the most comforting and nostalgic Filipino food. We source only high quality ingredients locally through other small businesses and farmers in BC to prepare and cook with love."
+      }
+    },
+    "story": {
+      "type": "media-text",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "fallback": "photo-skewers",
+        "image_alt": "BBQ pork skewers grilled over charcoal, topped with garlic bits and green onions",
+        "tag": "",
+        "flip": false,
+        "sand": true,
+        "kicker": "Our story",
+        "heading": "Fresh off the wok, grill, and fire",
+        "text": "<p>Nanay cooks Filipino comfort food in Langley for takeout, delivery, catering and events: silogs with wok-fried garlic rice, charcoal-grilled inihaw, palabok and party trays sized for every crowd.</p>",
+        "button_label": "See the menu",
+        "button_link": "shopify://pages/menu"
+      }
+    },
+    "why": {
+      "type": "why-nanay",
+      "blocks": {
+        "w1": { "type": "point", "settings": { "title": "Local, small-business ingredients", "text": "We source only high quality ingredients locally through other small businesses and farmers in BC." } },
+        "w2": { "type": "point", "settings": { "title": "Free-range eggs", "text": "Our silogs and palabok use free-range eggs from Coligny Creek Co." } },
+        "w3": { "type": "point", "settings": { "title": "Grilled over charcoal", "text": "Chicken inasal, liempo and skewers are marinated in-house and grilled over charcoal." } }
+      },
+      "block_order": ["w1", "w2", "w3"],
+      "settings": { "kicker": "What we care about", "heading": "Cooked with love", "sand": false }
+    },
+    "cta": {
+      "type": "cta-band",
+      "settings": {
+        "fallback": "photo-party-feast",
+        "kicker": "Hungry?",
+        "heading": "Let Nanay feed your people",
+        "text": "Order a feast online, or text us and we'll help you plan.",
+        "button_1_label": "Order a feast",
+        "button_1_link": "shopify://pages/menu",
+        "show_text_button": true
+      }
+    }
+  },
+  "order": ["meaning", "story", "why", "cta"]
+}

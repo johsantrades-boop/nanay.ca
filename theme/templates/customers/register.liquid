@@ -1,0 +1,17 @@
+<div class="container section stack" style="max-width:520px">
+  <h1 class="h1">Create an account</h1>
+  <div class="panel">
+    {%- form 'create_customer', novalidate: 'novalidate' -%}
+      {%- if form.errors -%}<div class="form-msg form-msg--err" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+      <div class="form-grid form-grid--2">
+        <div class="field"><label for="reg-first">First name</label><input class="input" id="reg-first" name="customer[first_name]" autocomplete="given-name"></div>
+        <div class="field"><label for="reg-last">Last name</label><input class="input" id="reg-last" name="customer[last_name]" autocomplete="family-name"></div>
+        <div class="field span-2"><label for="reg-email">Email</label><input class="input" id="reg-email" type="email" name="customer[email]" autocomplete="email" required></div>
+        <div class="field span-2"><label for="reg-pw">Password</label><input class="input" id="reg-pw" type="password" name="customer[password]" autocomplete="new-password" required></div>
+        <label class="check span-2"><input type="checkbox" name="customer[accepts_marketing]"> Send me exclusive discounts and updates</label>
+        <button class="btn btn--block span-2" type="submit">Create account</button>
+      </div>
+    {%- endform -%}
+  </div>
+  <p>Have an account? <a href="{{ routes.account_login_url }}">Log in</a></p>
+</div>

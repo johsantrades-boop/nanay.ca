@@ -1,0 +1,12 @@
+# Live admin data: password hash, first-login password, uploads, backups
+app/data/
+
+# Installed packages and build output
+node_modules/
+dist/
+
+# Raw download of the old nanay.ca (254 MB); the site uses the optimised copies in app/public
+assets/original-site/
+
+.DS_Store
+Thumbs.db

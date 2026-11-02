@@ -1,0 +1,51 @@
+<section class="page-hero page-hero--sand" style="padding-bottom:24px">
+  <div class="container"><h1 class="h1">Your order</h1></div>
+</section>
+<div class="container">
+  {%- if cart.item_count > 0 -%}
+    <form class="cart-page" action="{{ routes.cart_url }}" method="post" id="cart-page-form" novalidate>
+      <div class="panel">
+        <ul class="cart-items">
+          {%- for item in cart.items -%}
+            <li class="cart-item">
+              {%- if item.image -%}{{ item.image | image_url: width: 160, height: 160, crop: 'center' | image_tag: loading: 'lazy', alt: '' }}{%- else -%}<span></span>{%- endif -%}
+              <div>
+                <a class="cart-item__title" href="{{ item.url }}">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}<p class="cart-item__opts">{{ item.variant.title }}</p>{%- endunless -%}
+                <div class="qty" role="group" aria-label="Quantity for {{ item.product.title | escape }}">
+                  <button type="button" data-line="{{ forloop.index }}" data-qty="{{ item.quantity | minus: 1 }}" aria-label="One fewer">−</button>
+                  <input type="number" min="0" name="updates[]" value="{{ item.quantity }}" data-line-input="{{ forloop.index }}" aria-label="Quantity">
+                  <button type="button" data-line="{{ forloop.index }}" data-qty="{{ item.quantity | plus: 1 }}" aria-label="One more">+</button>
+                </div>
+              </div>
+              <div>
+                <p class="cart-item__price price">{{ item.final_line_price | money }}</p>
+                <button class="link-btn" type="button" data-line="{{ forloop.index }}" data-qty="0">Remove</button>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+        {% render 'cart-options', form_id: 'cart-page-form', scope: 'page' %}
+      </div>
+      <aside class="cart-page__summary panel stack">
+        <div class="cart-sub"><span>Subtotal</span><span class="price" data-cart-subtotal>{{ cart.total_price | money }}</span></div>
+        <p class="note">Taxes and any delivery fee are added at checkout.</p>
+        <p class="cart-progress" data-cart-progress hidden></p>
+        <button class="btn btn--block" type="submit" name="checkout">Checkout</button>
+        {%- if additional_checkout_buttons -%}<div>{{ content_for_additional_checkout_buttons }}</div>{%- endif -%}
+        <a class="btn btn--outline btn--block" href="sms:{{ settings.sms_number }}">{% render 'icon', name: 'chat' %}Prefer to order by text?</a>
+        <a class="link-arrow" href="{{ pages['menu'].url | default: routes.all_products_collection_url }}">Keep browsing the menu</a>
+      </aside>
+    </form>
+  {%- else -%}
+    <div class="cart-empty section">
+      <p class="h2">Your tray is empty</p>
+      <p class="muted">Start with a feast, or text us and we'll help you plan.</p>
+      <a class="btn" href="{{ pages['menu'].url | default: routes.all_products_collection_url }}">Browse the menu</a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{ "name": "Cart", "settings": [] }
+{% endschema %}

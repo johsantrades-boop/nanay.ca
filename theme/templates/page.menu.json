@@ -1,0 +1,53 @@
+{
+  "sections": {
+    "board": {
+      "type": "menu-board",
+      "blocks": {
+        "c1": { "type": "category", "settings": { "collection": "feature", "label": "Party feasts (15–100)", "note": "<p>For parties and handaan. Payment/deposit required to confirm order and reserve the event's date and time.</p>" } },
+        "c2": { "type": "category", "settings": { "collection": "share", "label": "Feasts to share", "note": "<p>Minimum $30 purchase for delivery.</p>" } },
+        "c3": { "type": "category", "settings": { "collection": "byof", "label": "Build your own party feast", "note": "<p>Mix and match trays. Half Size Deep Tray: good for 10-12 people.</p>" } },
+        "c4": { "type": "category", "settings": { "collection": "inihaw-buckets", "label": "Inihaw buckets", "note": "<p>Ready to grill. For picnics and camping.</p>" } },
+        "c5": { "type": "category", "settings": { "collection": "raw", "label": "Frozen, ready to grill", "note": "<p>Raw, marinated and frozen. Grilling instructions on each product.</p>" } },
+        "c6": { "type": "category", "settings": { "collection": "warehouse", "label": "Sweets but not too sweet", "note": "" } },
+        "c7": { "type": "category", "settings": { "collection": "mrsiopaodelangley", "label": "Locally made by Filipinos", "note": "" } },
+        "c8": { "type": "category", "settings": { "collection": "solo", "label": "Solo meals", "note": "<p>Meals for one, available for work lunches.</p>" } }
+      },
+      "block_order": ["c1", "c2", "c8", "c3", "c4", "c5", "c6", "c7"],
+      "settings": {
+        "kicker": "Order online or by text",
+        "heading": "The menu",
+        "text": "Fresh off the wok, grill, and fire! Pick a category, or search for a dish.",
+        "show_search": true,
+        "show_desc": true
+      }
+    },
+    "planner": {
+      "type": "feast-planner",
+      "blocks": {
+        "p15": { "type": "package", "settings": { "product": "party-feast-good-for-12-13-people", "serves": 15, "style": "party", "title": "Party Feast", "note": "good for 15" } },
+        "p30": { "type": "package", "settings": { "product": "fiesta-feast-good-for-30-35-people", "serves": 30, "style": "party", "title": "Fiesta Feast", "note": "good for 30–35" } },
+        "p50": { "type": "package", "settings": { "product": "feast-for-50", "serves": 50, "style": "party", "title": "Feast for 50", "note": "good for 50" } },
+        "p100": { "type": "package", "settings": { "product": "fiesta-festival-good-for-100", "serves": 100, "style": "party", "title": "Fiesta Festival", "note": "good for 100" } },
+        "i4": { "type": "package", "settings": { "product": "mini-inihaw-bbq-grilled-feast", "serves": 4, "style": "inihaw", "title": "Mini Inihaw Feast", "note": "good for 4" } },
+        "i6": { "type": "package", "settings": { "product": "inihaw-feast", "serves": 6, "style": "inihaw", "title": "Inihaw Feast", "note": "good for 6–8" } },
+        "g4": { "type": "package", "settings": { "product": "mother-s-day-weekend-silogs", "variant": "Mini Silog Feast", "serves": 4, "style": "silog", "title": "Mini Silog Feast", "note": "good for 4" } },
+        "g6": { "type": "package", "settings": { "product": "mother-s-day-weekend-silogs", "variant": "Silog Feast", "serves": 6, "style": "silog", "title": "Silog Feast", "note": "good for 6–8" } }
+      },
+      "block_order": ["p15", "p30", "p50", "p100", "i4", "i6", "g4", "g6"],
+      "settings": {
+        "kicker": "Not sure how much?",
+        "heading": "Feast planner",
+        "text": "Tell us your headcount and we'll suggest the trays.",
+        "default_guests": 20,
+        "extras": "byof",
+        "dessert": "ube-halaya",
+        "dessert_label": "Add dessert (Ube Halaya or Leche Flan)",
+        "dessert_note": "10 x 8 oz · good for about 20-30 people",
+        "dessert_serves": 30,
+        "note": "Planned from the low end of each 'good for' range, so nobody goes hungry.",
+        "sand": true
+      }
+    }
+  },
+  "order": ["board", "planner"]
+}

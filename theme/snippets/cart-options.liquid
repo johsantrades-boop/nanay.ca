@@ -1,0 +1,45 @@
+{%- comment -%}
+  Pickup/delivery, date, time and note, saved to the order as cart attributes so Nanay sees them in the Shopify admin.
+  Params: form_id, scope (unique id prefix)
+{%- endcomment -%}
+<div class="cart-options" data-cart-options>
+  {%- if settings.cart_fulfilment -%}
+    <fieldset class="field">
+      <legend>Pickup or delivery?</legend>
+      <div class="seg" style="grid-template-columns:1fr 1fr">
+        <input type="radio" id="{{ scope }}-pickup" name="attributes[Fulfilment]" value="Pickup" form="{{ form_id }}" data-attr{% if cart.attributes.Fulfilment != 'Delivery' %} checked{% endif %}>
+        <label for="{{ scope }}-pickup">Pickup</label>
+        <input type="radio" id="{{ scope }}-delivery" name="attributes[Fulfilment]" value="Delivery" form="{{ form_id }}" data-attr{% if cart.attributes.Fulfilment == 'Delivery' %} checked{% endif %}>
+        <label for="{{ scope }}-delivery">Delivery</label>
+      </div>
+      <p class="hint" data-fulfil-hint="Pickup"{% if cart.attributes.Fulfilment == 'Delivery' %} hidden{% endif %}>Pickup at {{ settings.pickup_name }}{% if settings.pickup_address != blank %}, {{ settings.pickup_address }}{% endif %} · {{ settings.hours }}</p>
+      <p class="hint" data-fulfil-hint="Delivery"{% unless cart.attributes.Fulfilment == 'Delivery' %} hidden{% endunless %}>{{ settings.delivery_note }} Add your address at checkout.</p>
+    </fieldset>
+  {%- endif -%}
+  {%- if settings.cart_date or settings.cart_time -%}
+    <div class="form-grid form-grid--2">
+      {%- if settings.cart_date -%}
+        <div class="field">
+          <label for="{{ scope }}-date">Date needed</label>
+          <input class="input" type="date" id="{{ scope }}-date" name="attributes[Requested date]" value="{{ cart.attributes['Requested date'] }}" form="{{ form_id }}" data-attr data-min-date>
+          {%- if settings.lead_days > 0 -%}<p class="hint">Please give at least {{ settings.lead_days }} days' notice.</p>{%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if settings.cart_time -%}
+        <div class="field">
+          <label for="{{ scope }}-time">Preferred time</label>
+          {%- assign t = cart.attributes['Preferred time'] -%}
+          <select class="select" id="{{ scope }}-time" name="attributes[Preferred time]" form="{{ form_id }}" data-attr>
+            <option value=""{% if t == blank %} selected{% endif %}>Any time</option>
+            {%- assign slots = '10am–12pm,12pm–2pm,2pm–4pm,4pm–6pm' | split: ',' -%}
+            {%- for s in slots -%}<option{% if t == s %} selected{% endif %}>{{ s }}</option>{%- endfor -%}
+          </select>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  <div class="field">
+    <label for="{{ scope }}-note">{{ settings.cart_note_label }}</label>
+    <textarea class="textarea" id="{{ scope }}-note" name="note" rows="3" form="{{ form_id }}" data-cart-note style="min-height:88px">{{ cart.note }}</textarea>
+  </div>
+</div>

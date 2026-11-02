@@ -1,0 +1,29 @@
+<section class="section section--sand" data-recs data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.limit }}&intent=complementary">
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <div class="container">
+      <div class="section-head"><h2 class="h2">{{ section.settings.heading }}</h2></div>
+      <div class="grid grid--4">
+        {%- for product in recommendations.products -%}{% render 'product-card', product: product %}{%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+<script>
+  (() => {
+    const el = document.currentScript.previousElementSibling;
+    if (el.children.length) return;
+    const load = url => fetch(url).then(r => r.text()).then(t => new DOMParser().parseFromString(t, 'text/html').querySelector('[data-recs]'));
+    load(el.dataset.url).then(n => (n && n.children.length) ? n : load(el.dataset.url.replace('&intent=complementary', '')))
+      .then(n => { if (n && n.children.length) el.innerHTML = n.innerHTML; else el.remove(); }).catch(() => el.remove());
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Goes well with",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Complete the feast" },
+    { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 8, "step": 1, "default": 4 }
+  ]
+}
+{% endschema %}

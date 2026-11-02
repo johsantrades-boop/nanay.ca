@@ -1,0 +1,45 @@
+<section class="section section--aqua" aria-labelledby="how-{{ section.id }}">
+  <div class="container">
+    <div class="section-head reveal">
+      {%- if section.settings.kicker != blank -%}<p class="kicker" style="color:var(--aqua-ink)">{{ section.settings.kicker }}</p>{%- endif -%}
+      <h2 class="h1" id="how-{{ section.id }}">{{ section.settings.heading }}</h2>
+    </div>
+    <ol class="steps" style="list-style:none">
+      {%- for block in section.blocks -%}
+        <li class="step reveal" style="transition-delay: {{ forloop.index0 | times: 90 }}ms" {{ block.shopify_attributes }}>
+          <span class="step__icon">{% render 'icon', name: block.settings.icon %}</span>
+          <p class="kicker" style="color:var(--aqua-ink)">Step {{ forloop.index }}</p>
+          <h3 class="step__title">{{ block.settings.title }}</h3>
+          <p class="muted">{{ block.settings.text }}</p>
+        </li>
+      {%- endfor -%}
+    </ol>
+    {%- if section.settings.show_facts -%}
+      <div class="facts reveal">
+        <p class="fact"><b>Hours</b>{{ settings.hours }}</p>
+        <p class="fact"><b>Pickup</b>{% if settings.map_url != blank %}<a href="{{ settings.map_url }}" target="_blank" rel="noopener">{{ settings.pickup_name }}</a>{% else %}{{ settings.pickup_name }}{% endif %}{% if settings.pickup_address != blank %}, {{ settings.pickup_address }}{% endif %}</p>
+        <p class="fact"><b>Delivery</b>{{ settings.delivery_note }}</p>
+        <p class="fact"><b>Order ahead</b>{% if settings.lead_days > 0 %}At least {{ settings.lead_days }} days' notice. {% endif %}Changes up to 3 days before{% if pages['how-to-order'] != blank %} · <a href="{{ pages['how-to-order'].url }}">details</a>{% endif %}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How ordering works",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Small line", "default": "Easy as 1, 2, 3" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How ordering works" },
+    { "type": "checkbox", "id": "show_facts", "label": "Show hours, pickup, delivery and notice (from Theme settings)", "default": true }
+  ],
+  "blocks": [
+    { "type": "step", "name": "Step", "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "options": [ { "value": "people", "label": "People" }, { "value": "calendar", "label": "Calendar" }, { "value": "chat", "label": "Chat" }, { "value": "truck", "label": "Truck" }, { "value": "pin", "label": "Pin" }, { "value": "fire", "label": "Fire" } ], "default": "people" },
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "textarea", "id": "text", "label": "Text" } ] }
+  ],
+  "max_blocks": 4,
+  "presets": [ { "name": "How ordering works" } ]
+}
+{% endschema %}

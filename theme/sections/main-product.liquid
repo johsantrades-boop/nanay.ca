@@ -1,0 +1,114 @@
+{%- liquid
+  assign current = product.selected_or_first_available_variant
+  assign title = product.title
+  assign serves = product.metafields.custom.serves.value
+  if title contains '(Good for'
+    assign parts = title | split: '(Good for'
+    assign title = parts.first | strip
+    if serves == blank
+      assign serves = parts.last | remove: ')' | strip
+    endif
+  endif
+  assign media_first = current.featured_media | default: product.featured_media
+-%}
+<div class="container">
+  <p class="breadcrumbs"><a href="{{ routes.root_url }}">Home</a> / <a href="{{ pages['menu'].url | default: routes.all_products_collection_url }}">Menu</a>{% if collection %} / <a href="{{ collection.url }}">{{ collection.title }}</a>{% endif %}</p>
+  <div class="pdp" data-product>
+    <div class="gallery" data-gallery>
+      <div class="gallery__main">
+        {%- if media_first -%}
+          {{ media_first.preview_image | image_url: width: 1400 | image_tag: widths: '540, 720, 960, 1200, 1400', sizes: '(min-width: 900px) 55vw, 100vw', loading: 'eager', fetchpriority: 'high', alt: product.title }}
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+        <div class="gallery__thumbs" role="list" aria-label="Product photos">
+          {%- for m in product.media -%}
+            {%- if m.media_type == 'image' -%}
+              <button type="button" role="listitem" data-media-id="{{ m.id }}" aria-current="{% if m.id == media_first.id %}true{% else %}false{% endif %}"
+                data-src="{{ m.preview_image | image_url: width: 1400 }}" data-srcset="{{ m.preview_image | image_url: width: 720 }} 720w, {{ m.preview_image | image_url: width: 1400 }} 1400w" data-alt="{{ m.alt | default: product.title | escape }}">
+                {{ m.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
+                <span class="visually-hidden">Show photo {{ forloop.index }}</span>
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="pdp__info">
+      <div class="stack-sm">
+        {%- if serves != blank -%}<span class="badge">{% render 'icon', name: 'people' %}Good for {{ serves }}</span>{%- endif -%}
+        <h1 class="h1">{{ title }}</h1>
+        <p class="pdp__price price" data-price>{{ current.price | money }}{% if current.compare_at_price > current.price %} <s>{{ current.compare_at_price | money }}</s>{% endif %}</p>
+      </div>
+
+      {%- form 'product', product, data-add-form: '', id: 'product-form', novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" value="{{ current.id }}">
+        <div class="stack">
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <fieldset class="opt" data-option>
+                <legend>{{ option.name }}</legend>
+                <div class="opt__choices">
+                  {%- for value in option.values -%}
+                    <input type="radio" id="opt-{{ forloop.parentloop.index }}-{{ forloop.index }}" name="{{ option.name | escape }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %}>
+                    <label for="opt-{{ forloop.parentloop.index }}-{{ forloop.index }}">{{ value }}</label>
+                  {%- endfor -%}
+                </div>
+              </fieldset>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <div class="buy-row">
+            <div class="qty" role="group" aria-label="Quantity">
+              <button type="button" data-qty-step="-1" aria-label="One fewer">−</button>
+              <input type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+              <button type="button" data-qty-step="1" aria-label="One more">+</button>
+            </div>
+            <button class="btn" type="submit" data-add-btn data-label="Add to order"{% unless current.available %} disabled{% endunless %}>
+              {%- if current.available -%}Add to order{%- else -%}Sold out{%- endif -%}
+            </button>
+          </div>
+        </div>
+      {%- endform -%}
+
+      <a class="btn btn--outline btn--block" href="sms:{{ settings.sms_number }}?&body={{ 'Hi Nanay! I have a question about the ' | append: title | append: '.' | url_encode }}">{% render 'icon', name: 'chat' %}Questions? Text Nanay</a>
+
+      {%- if product.description != blank -%}
+        <div class="stack-sm">
+          <h2 class="h3">What's included</h2>
+          <div class="rte">{{ product.description }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- liquid
+        assign heating = product.metafields.custom.heating.value
+        assign allergens = product.metafields.custom.contains.value
+        assign good_to_know = product.metafields.custom.good_to_know.value
+      -%}
+      {%- if heating != blank or allergens != blank or good_to_know != blank -%}
+        <div class="stack-sm">
+          <h2 class="h3">Good to know</h2>
+          <dl class="gtk">
+            {%- if heating != blank -%}<div class="gtk__row">{% render 'icon', name: 'fire' %}<dt>How to heat</dt><dd>{{ heating | newline_to_br }}</dd></div>{%- endif -%}
+            {%- if allergens != blank -%}<div class="gtk__row">{% render 'icon', name: 'info' %}<dt>Contains</dt><dd>{{ allergens }}</dd></div>{%- endif -%}
+            {%- if good_to_know != blank -%}<div class="gtk__row">{% render 'icon', name: 'leaf' %}<dt>Also</dt><dd>{{ good_to_know | newline_to_br }}</dd></div>{%- endif -%}
+          </dl>
+        </div>
+      {%- endif -%}
+
+      <div class="info-card">
+        <p class="info-card__row">{% render 'icon', name: 'pin' %}<span><b>Pickup</b> at {{ settings.pickup_name }}{% if settings.pickup_address != blank %}, {{ settings.pickup_address }}{% endif %} · {{ settings.hours }}</span></p>
+        <p class="info-card__row">{% render 'icon', name: 'truck' %}<span><b>Delivery</b> · {{ settings.delivery_note }}</span></p>
+        <p class="info-card__row">{% render 'icon', name: 'calendar' %}<span><b>Order ahead</b> · choose your date in the cart{% if settings.lead_days > 0 %} ({{ settings.lead_days }}+ days' notice){% endif %}.</span></p>
+        <p class="info-card__row">{% render 'icon', name: 'info' %}<span>{{ settings.refund_policy }}</span></p>
+      </div>
+    </div>
+
+    <script type="application/json" data-product-json>{{ product | json }}</script>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Product", "settings": [] }
+{% endschema %}

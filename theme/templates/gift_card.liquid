@@ -1,0 +1,24 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gift card | {{ shop.name }}</title>
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  <style>:root { --bg: {{ settings.color_bg }}; --surface: #fff; --text: {{ settings.color_text }}; --muted: {{ settings.color_muted }}; --primary: {{ settings.color_primary }}; --primary-hover: {{ settings.color_primary_hover }}; --on-primary: #fff; --border: {{ settings.color_border }}; --sand: {{ settings.color_sand }}; --aqua: {{ settings.color_aqua }}; }</style>
+  {{ content_for_header }}
+</head>
+<body>
+  <main class="container section" style="max-width:560px;text-align:center">
+    <p class="logo" style="justify-items:center"><span class="logo__word">NANAY</span><span class="logo__sub">FILIPINO COMFORT FOOD</span></p>
+    <div class="panel stack" style="margin-top:28px">
+      <p class="h2">{{ gift_card.initial_value | money }} gift card</p>
+      {%- if gift_card.balance != gift_card.initial_value -%}<p>Balance: <b>{{ gift_card.balance | money }}</b></p>{%- endif -%}
+      <p>Code: <b style="font-size:22px;letter-spacing:.08em">{{ gift_card.code | format_code }}</b></p>
+      {%- if gift_card.expired -%}<p class="form-msg form-msg--err">Expired on {{ gift_card.expires_on | date: '%B %e, %Y' }}</p>{%- endif -%}
+      <a class="btn" href="{{ shop.url }}">Start an order</a>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{%- assign fid = address.id | default: 'new' -%}
+{%- form 'customer_address', address -%}
+  {%- if form.errors -%}<div class="form-msg form-msg--err" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+  <div class="form-grid form-grid--2" style="margin-top:14px">
+    <div class="field"><label for="a1-{{ fid }}">First name</label><input class="input" id="a1-{{ fid }}" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name"></div>
+    <div class="field"><label for="a2-{{ fid }}">Last name</label><input class="input" id="a2-{{ fid }}" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name"></div>
+    <div class="field span-2"><label for="a3-{{ fid }}">Address</label><input class="input" id="a3-{{ fid }}" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1"></div>
+    <div class="field span-2"><label for="a4-{{ fid }}">Apartment, buzzer, etc.</label><input class="input" id="a4-{{ fid }}" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2"></div>
+    <div class="field"><label for="a5-{{ fid }}">City</label><input class="input" id="a5-{{ fid }}" name="address[city]" value="{{ form.city }}" autocomplete="address-level2"></div>
+    <div class="field"><label for="a6-{{ fid }}">Postal code</label><input class="input" id="a6-{{ fid }}" name="address[zip]" value="{{ form.zip }}" autocomplete="postal-code"></div>
+    <div class="field"><label for="a7-{{ fid }}">Country</label><select class="select" id="a7-{{ fid }}" name="address[country]" autocomplete="country">{{ all_country_option_tags }}</select></div>
+    <div class="field"><label for="a8-{{ fid }}">Province</label><input class="input" id="a8-{{ fid }}" name="address[province]" value="{{ form.province | default: 'British Columbia' }}" autocomplete="address-level1"></div>
+    <div class="field span-2"><label for="a9-{{ fid }}">Phone</label><input class="input" id="a9-{{ fid }}" type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel"></div>
+    <label class="check span-2">{{ form.set_as_default_checkbox }} Use as default</label>
+    <button class="btn span-2" type="submit">Save address</button>
+  </div>
+{%- endform -%}

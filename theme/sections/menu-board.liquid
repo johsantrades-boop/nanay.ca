@@ -1,0 +1,73 @@
+{%- comment -%}
+  The full menu on one page. Each "Category" block is a Shopify collection, so adding/removing products in
+  Products > Collections updates the menu automatically. The chip bar sticks under the header.
+{%- endcomment -%}
+<div data-menu-board>
+  <section class="page-hero page-hero--sand">
+    <div class="container">
+      <p class="kicker">{{ section.settings.kicker }}</p>
+      <h1 class="h1" style="margin-top:10px">{{ section.settings.heading }}</h1>
+      {%- if section.settings.text != blank -%}<p class="lead">{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+  </section>
+
+  <div class="menu-nav">
+    <div class="container stack-sm">
+      <nav class="chips" aria-label="Menu categories">
+        {%- for block in section.blocks -%}
+          {%- assign c = block.settings.collection -%}
+          {%- if c != blank -%}
+            <a class="chip" href="#{{ c.handle }}" data-menu-chip aria-current="{% if forloop.first %}true{% else %}false{% endif %}">{{ block.settings.label | default: c.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+      {%- if section.settings.show_search -%}
+        <div class="menu-search">
+          <label class="visually-hidden" for="menu-search-{{ section.id }}">Search the menu</label>
+          <input type="search" id="menu-search-{{ section.id }}" placeholder="Search the menu, e.g. liempo, palabok, vegan" data-menu-search autocomplete="off">
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom: clamp(56px, 8vw, 96px)">
+    {%- for block in section.blocks -%}
+      {%- assign c = block.settings.collection -%}
+      {%- if c != blank -%}
+        <section class="menu-group" id="{{ c.handle }}" data-menu-group aria-labelledby="mg-{{ block.id }}" {{ block.shopify_attributes }}>
+          <div class="menu-group__head">
+            <h2 class="h2" id="mg-{{ block.id }}">{{ block.settings.label | default: c.title }}</h2>
+            {%- assign note = block.settings.note | default: c.description -%}
+            {%- if note != blank -%}<div class="menu-group__note muted rte">{{ note }}</div>{%- endif -%}
+          </div>
+          <div class="grid grid--4">
+            {%- for product in c.products limit: 50 -%}
+              {% render 'product-card', product: product, show_desc: section.settings.show_desc, eager: false %}
+            {%- endfor -%}
+          </div>
+        </section>
+      {%- endif -%}
+    {%- endfor -%}
+    <p class="menu-empty" data-menu-empty hidden>No dishes match that. Try another word, or <a href="sms:{{ settings.sms_number }}">text us</a> and we'll help.</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Full menu",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Small line", "default": "Order online or by text" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The menu" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Fresh off the wok, grill, and fire! Pick a category, or search for a dish." },
+    { "type": "checkbox", "id": "show_search", "label": "Show search box", "default": true },
+    { "type": "checkbox", "id": "show_desc", "label": "Show short descriptions on cards", "default": true }
+  ],
+  "blocks": [
+    { "type": "category", "name": "Category", "settings": [
+      { "type": "collection", "id": "collection", "label": "Collection" },
+      { "type": "text", "id": "label", "label": "Label", "info": "Empty = collection title." },
+      { "type": "richtext", "id": "note", "label": "Note", "info": "Empty = collection description." } ] }
+  ],
+  "presets": [ { "name": "Full menu" } ]
+}
+{% endschema %}

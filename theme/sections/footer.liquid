@@ -1,0 +1,82 @@
+{%- assign menu_page_url = pages['menu'].url | default: routes.all_products_collection_url -%}
+<footer class="site-footer" {{ section.shopify_attributes }}>
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand stack">
+        <a class="logo" href="{{ routes.root_url }}">
+          <span class="logo__word">NANAY</span>
+          <span class="logo__sub">FILIPINO COMFORT FOOD</span>
+        </a>
+        {%- if section.settings.tagline != blank -%}<p class="footer__policy">{{ section.settings.tagline }}</p>{%- endif -%}
+        <div class="socials">
+          {%- if settings.instagram_url != blank -%}<a href="{{ settings.instagram_url }}" target="_blank" rel="noopener">{% render 'icon', name: 'instagram' %}<span class="visually-hidden">Instagram (opens in a new tab)</span></a>{%- endif -%}
+          {%- if settings.threads_url != blank -%}<a href="{{ settings.threads_url }}" target="_blank" rel="noopener">{% render 'icon', name: 'threads' %}<span class="visually-hidden">Threads (opens in a new tab)</span></a>{%- endif -%}
+          {%- if settings.facebook_url != blank -%}<a href="{{ settings.facebook_url }}" target="_blank" rel="noopener">{% render 'icon', name: 'facebook' %}<span class="visually-hidden">Facebook (opens in a new tab)</span></a>{%- endif -%}
+        </div>
+      </div>
+
+      <div>
+        <p class="footer__title">Order</p>
+        <ul class="footer__list">
+          {%- if section.settings.menu_1.links.size > 0 -%}
+            {%- for link in section.settings.menu_1.links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}
+          {%- else -%}
+            <li><a href="{{ menu_page_url }}">Full menu</a></li>
+            {%- if pages['catering'] != blank -%}<li><a href="{{ pages['catering'].url }}">Catering & events</a></li>{%- endif -%}
+            {%- if pages['how-to-order'] != blank -%}<li><a href="{{ pages['how-to-order'].url }}">How to order</a></li>{%- endif -%}
+            <li><a href="{{ routes.cart_url }}">Cart</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer__title">Visit & contact</p>
+        <ul class="footer__list">
+          <li><a href="sms:{{ settings.sms_number }}">Text {{ settings.phone_display }}</a></li>
+          <li><a href="tel:{{ settings.sms_number }}">Call {{ settings.phone_display }}</a></li>
+          <li><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></li>
+          <li>{{ settings.hours }}</li>
+          <li>Pickup: {% if settings.map_url != blank %}<a href="{{ settings.map_url }}" target="_blank" rel="noopener">{{ settings.pickup_name }}</a>{% else %}{{ settings.pickup_name }}{% endif %}{% if settings.pickup_address != blank %}, {{ settings.pickup_address }}{% endif %}</li>
+        </ul>
+      </div>
+
+      <div class="stack">
+        <p class="footer__title">{{ section.settings.newsletter_heading }}</p>
+        <p class="footer__policy">{{ section.settings.newsletter_text }}</p>
+        {%- form 'customer', id: 'footer-newsletter', class: 'newsletter' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p class="form-msg form-msg--ok" role="status">Salamat! You're on the list.</p>
+          {%- else -%}
+            <label class="visually-hidden" for="footer-email">Email address</label>
+            <input class="input" id="footer-email" type="email" name="contact[email]" autocomplete="email" placeholder="Email address" required>
+            <button class="btn" type="submit">Subscribe</button>
+            {%- if form.errors -%}<p class="form-msg form-msg--err" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}
+          {%- endif -%}
+        {%- endform -%}
+        <p class="footer__title" style="margin-top:22px">Refund / cancellation</p>
+        <p class="footer__policy">{{ settings.refund_policy }}</p>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }} · Filipino comfort food, {{ settings.city }}</p>
+      <ul class="footer__list" style="display:flex;flex-wrap:wrap;gap:4px 16px">
+        {%- for policy in shop.policies -%}<li><a href="{{ policy.url }}">{{ policy.title }}</a></li>{%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "settings": [
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Our mission is to share the most comforting and nostalgic Filipino food." },
+    { "type": "link_list", "id": "menu_1", "label": "Order links", "info": "Empty = Full menu, Catering, How to order, Cart." },
+    { "type": "text", "id": "newsletter_heading", "label": "Newsletter heading", "default": "Subscribe to our newsletter" },
+    { "type": "text", "id": "newsletter_text", "label": "Newsletter text", "default": "Sign up for exclusive discounts and the latest updates" }
+  ]
+}
+{% endschema %}

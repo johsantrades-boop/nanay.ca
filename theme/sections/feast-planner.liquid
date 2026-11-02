@@ -1,0 +1,162 @@
+{%- comment -%}
+  Feast planner: suggests the cheapest mix of real menu packages for a headcount.
+  Each "Package" block points at a product and says how many it serves; prices come live from Shopify.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id | replace: '-', '_'
+-%}
+<section class="section{% if s.sand %} section--sand{% endif %}" id="planner" aria-labelledby="planner-{{ section.id }}">
+  <div class="container">
+    <div class="section-head reveal">
+      {%- if s.kicker != blank -%}<p class="kicker">{{ s.kicker }}</p>{%- endif -%}
+      <h2 class="h1" id="planner-{{ section.id }}">{{ s.heading }}</h2>
+      {%- if s.text != blank -%}<p class="lead">{{ s.text }}</p>{%- endif -%}
+    </div>
+
+    <div class="planner reveal" data-planner>
+      <form class="planner__form" onsubmit="return false" aria-label="Plan your feast">
+        <div class="stack-sm">
+          <label class="planner__label" for="guests-{{ section.id }}">How many guests?</label>
+          <div class="guests">
+            <button class="step-btn" type="button" data-step="-1" aria-label="One fewer guest">−</button>
+            <output data-guests-out for="guests-{{ section.id }}" aria-live="polite">{{ s.default_guests }}</output>
+            <button class="step-btn" type="button" data-step="1" aria-label="One more guest">+</button>
+            <span class="muted">guests</span>
+          </div>
+          <input class="range" type="range" id="guests-{{ section.id }}" min="2" max="150" value="{{ s.default_guests }}" data-guests-range>
+        </div>
+
+        <fieldset class="stack-sm">
+          <legend class="planner__label">What's the vibe?</legend>
+          <div class="seg">
+            <input type="radio" name="planner-style-{{ uid }}" id="st-party-{{ uid }}" value="party" checked><label for="st-party-{{ uid }}">Party spread</label>
+            <input type="radio" name="planner-style-{{ uid }}" id="st-inihaw-{{ uid }}" value="inihaw"><label for="st-inihaw-{{ uid }}">Inihaw</label>
+            <input type="radio" name="planner-style-{{ uid }}" id="st-silog-{{ uid }}" value="silog"><label for="st-silog-{{ uid }}">Silog</label>
+          </div>
+        </fieldset>
+
+        {%- if s.dessert != blank -%}
+          <label class="check"><input type="checkbox" data-dessert> {{ s.dessert_label }}</label>
+        {%- endif -%}
+        <p class="note">{{ s.note }}</p>
+      </form>
+
+      <div class="planner__receipt" aria-live="polite">
+        <p class="kicker" data-receipt-title>Suggested order</p>
+        <ul class="receipt-lines" data-lines></ul>
+        <div class="receipt-add">
+          <label class="visually-hidden" for="add-{{ section.id }}">Add a dish to this order</label>
+          <select class="select" id="add-{{ section.id }}" data-add-select>
+            <option value="">+ Add a dish or tray…</option>
+          </select>
+          <button class="btn btn--sm btn--outline" type="button" data-add-line>Add</button>
+        </div>
+        <p class="note" data-edited hidden>You've adjusted the suggestion. <button class="link-btn" type="button" data-reset>Reset to suggestion</button></p>
+        <div class="receipt-total">
+          <div><span class="big price" data-total>$0</span><br><small class="muted" data-feeds></small></div>
+          <span class="pp price" data-pp></span>
+        </div>
+        <div class="receipt-actions">
+          <a class="btn btn--block" href="sms:{{ settings.sms_number }}" data-text-order>{% render 'icon', name: 'chat' %}Text this order to Nanay</a>
+          <button class="btn btn--outline btn--block" type="button" data-add-plan>Add all to cart</button>
+        </div>
+        <p class="note note--warn" data-hint hidden>That's a lot of trays. For a crowd this size, try the Party spread.</p>
+        <p class="note">Estimate from menu prices and serving sizes, before delivery and taxes. Your order is confirmed with Nanay by text.</p>
+      </div>
+
+      <script type="application/json" data-planner-json>
+        {
+          "id": {{ uid | json }},
+          "packages": [
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign p = block.settings.product
+                assign v = p.selected_or_first_available_variant
+                assign variant_count = p.variants.size | default: 1
+                if block.settings.variant != blank
+                  for pv in p.variants
+                    if pv.title == block.settings.variant
+                      assign v = pv
+                      assign variant_count = 1
+                      break
+                    endif
+                  endfor
+                endif
+              -%}
+              {
+                "title": {{ block.settings.title | default: p.title | split: ' (Good for' | first | json }},
+                "note": {{ block.settings.note | json }},
+                "serves": {{ block.settings.serves | default: 0 }},
+                "price": {{ v.price | default: 0 }},
+                "style": {{ block.settings.style | json }},
+                "url": {{ v.url | default: p.url | default: '#' | json }},
+                "variants": {{ variant_count }},
+                "variantId": {{ v.id | default: 0 }}
+              }{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          ],
+          "dessert": {% if s.dessert != blank %}{
+            "title": {{ s.dessert.title | json }}, "note": {{ s.dessert_note | json }}, "serves": {{ s.dessert_serves | default: 30 }},
+            "price": {{ s.dessert.selected_or_first_available_variant.price | default: 0 }}, "url": {{ s.dessert.url | json }},
+            "variants": {{ s.dessert.variants.size }}, "variantId": {{ s.dessert.selected_or_first_available_variant.id | default: 0 }}
+          }{% else %}null{% endif %},
+          "extras": [
+            {%- for p in s.extras.products limit: 40 -%}
+              {%- liquid
+                assign v = p.selected_or_first_available_variant
+                assign ps = p.metafields.custom.serves.value
+                assign extra_title = p.title | split: ' (Good for' | first
+              -%}
+              {
+                "title": {{ extra_title | json }},
+                "note": {% if ps != blank %}{{ 'good for ' | append: ps | json }}{% else %}""{% endif %},
+                "serves": 0,
+                "price": {% if p.variants.size > 1 %}{{ p.price_min | default: 0 }}{% else %}{{ v.price | default: 0 }}{% endif %},
+                "url": {{ p.url | json }},
+                "variants": {{ p.variants.size }},
+                "variantId": {{ v.id | default: 0 }},
+                "available": {{ p.available | json }}
+              }{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          ]
+        }
+      </script>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feast planner",
+  "class": "section-planner",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Small line", "default": "Feast planner" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Tell us your headcount" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "We'll suggest the best-fitting feasts from the menu and what it works out to per person. Then text it to us, or add it to your cart." },
+    { "type": "range", "id": "default_guests", "label": "Starting guest count", "min": 4, "max": 100, "step": 1, "default": 25 },
+    { "type": "product", "id": "dessert", "label": "Dessert to offer" },
+    { "type": "text", "id": "dessert_label", "label": "Dessert checkbox label", "default": "Add dessert (Ube Halaya or Leche Flan)" },
+    { "type": "text", "id": "dessert_note", "label": "Dessert note", "default": "10 × 8 oz · about 20–30" },
+    { "type": "number", "id": "dessert_serves", "label": "Dessert serves", "default": 30 },
+    { "type": "collection", "id": "extras", "label": "Extra dishes customers can add", "info": "Shown in the \"+ Add a dish or tray\" list, along with every package below. For example a collection of trays, sides and desserts." },
+    { "type": "text", "id": "note", "label": "Small print under the form", "default": "Planned from the low end of each 'good for' range, so nobody goes hungry." },
+    { "type": "checkbox", "id": "sand", "label": "Sand background", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "package",
+      "name": "Package",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "number", "id": "serves", "label": "Serves (people)", "info": "Use the low end of the range.", "default": 6 },
+        { "type": "select", "id": "style", "label": "Planner style", "options": [ { "value": "party", "label": "Party spread" }, { "value": "inihaw", "label": "Inihaw" }, { "value": "silog", "label": "Silog" } ], "default": "party" },
+        { "type": "text", "id": "title", "label": "Name in planner", "info": "Empty = product title." },
+        { "type": "text", "id": "note", "label": "Note", "default": "good for 6–8" },
+        { "type": "text", "id": "variant", "label": "Exact variant name (optional)", "info": "For products with sizes, e.g. 'Mini Silog Feast'. The planner then uses that variant's price and can add it straight to the cart." }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Feast planner" } ]
+}
+{% endschema %}

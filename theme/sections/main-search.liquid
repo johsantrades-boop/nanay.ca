@@ -1,0 +1,33 @@
+<section class="page-hero page-hero--sand">
+  <div class="container stack">
+    <h1 class="h1">Search</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="newsletter" style="max-width:640px">
+      <label class="visually-hidden" for="search-q">Search the menu</label>
+      <input class="input" id="search-q" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Try liempo, palabok, party">
+      <input type="hidden" name="type" value="product">
+      <button class="btn" type="submit">Search</button>
+    </form>
+  </div>
+</section>
+<div class="container section--tight">
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      <p class="muted" style="margin-bottom:20px" role="status">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for “{{ search.terms | escape }}”</p>
+      <div class="grid grid--4">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', product: item, show_desc: true %}
+          {%- else -%}
+            <a class="card" href="{{ item.url }}" style="text-decoration:none"><div class="card__body"><p class="card__title">{{ item.title }}</p></div></a>
+          {%- endif -%}
+        {%- else -%}
+          <p>Nothing found. Try another word, or <a href="sms:{{ settings.sms_number }}">text us</a>.</p>
+        {%- endfor -%}
+      </div>
+    {%- endpaginate -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

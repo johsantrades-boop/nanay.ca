@@ -1,0 +1,48 @@
+{
+  "current": {
+    "phone_display": "(604) 652-1930",
+    "sms_number": "+16046521930",
+    "email": "info@nanay.ca",
+    "hours": "Mon–Sun 10am–6pm",
+    "hours_schema": "Mo-Su 10:00-18:00",
+    "pickup_name": "Pureprep Commissary Kitchen",
+    "pickup_address": "301-20381 62 Ave",
+    "map_url": "https://www.google.com/maps/search/?api=1&query=Pureprep%20Commissary%20Kitchen%2C%20301-20381%2062%20Ave%2C%20Langley%2C%20BC",
+    "city": "Langley, BC",
+    "delivery_note": "Delivery available. Minimum $30 purchase for delivery.",
+    "delivery_minimum": 30,
+    "lead_days": 3,
+    "refund_policy": "Orders can be modified up to 3 days before order pickup/delivery date. No refund or cancellation within 1 week of order pickup/delivery date. Credit can be issued upon request.",
+    "instagram_url": "https://www.instagram.com/nanaykitchen/",
+    "threads_url": "https://www.threads.net/@nanaykitchen",
+    "show_intro": true,
+    "logo_height": 44,
+    "color_bg": "#FFF9F0",
+    "color_surface": "#FFFFFF",
+    "color_sand": "#F4E9DC",
+    "color_text": "#392618",
+    "color_muted": "#6B5444",
+    "color_primary": "#C2410C",
+    "color_primary_hover": "#9A3412",
+    "color_on_primary": "#FFFFFF",
+    "color_aqua": "#BFE4EA",
+    "color_aqua_ink": "#1F5E6B",
+    "color_yolk": "#F6B73C",
+    "color_border": "#E7D8C6",
+    "color_border_control": "#8F7966",
+    "cart_type": "drawer",
+    "cart_fulfilment": true,
+    "cart_date": true,
+    "cart_time": true,
+    "cart_note_label": "Notes for Nanay (allergies, substitutions, address details)",
+    "show_order_bar": true,
+    "seo_description": "Filipino party trays and feasts for 4 to 100 from Nanay in Langley, BC. Charcoal-grilled inihaw, silogs, palabok and desserts. Text (604) 652-1930 or order online."
+  },
+  "presets": {
+    "Default": {
+      "color_bg": "#FFF9F0",
+      "color_text": "#392618",
+      "color_primary": "#C2410C"
+    }
+  }
+}

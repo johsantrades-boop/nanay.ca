@@ -1,0 +1,25 @@
+{%- assign words = section.settings.definition | split: ' ' -%}
+<section class="section meaning" aria-labelledby="meaning-{{ section.id }}">
+  <div class="container">
+    <h2 class="meaning__word" id="meaning-{{ section.id }}">{{ section.settings.word }}</h2>
+    <p class="meaning__def">
+      {%- for w in words -%}
+        {%- assign r = forloop.index | modulo: 3 | minus: 1 | times: 4 -%}
+        <span class="w" style="--i:{{ forloop.index0 }};--r:{{ r }}deg">{{ w }}</span>{% unless forloop.last %} {% endunless %}
+      {%- endfor -%}
+    </p>
+    {%- if section.settings.mission != blank -%}<p class="meaning__mission">{{ section.settings.mission }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Word meaning",
+  "settings": [
+    { "type": "text", "id": "word", "label": "Word", "default": "Nanay" },
+    { "type": "textarea", "id": "definition", "label": "Meaning", "default": "mother in Tagalog, or an affectionate or honorific term for an older woman" },
+    { "type": "textarea", "id": "mission", "label": "Text below", "default": "Our mission is to share the most comforting and nostalgic Filipino food. We source only high quality ingredients locally through other small businesses and farmers in BC to prepare and cook with love." }
+  ],
+  "presets": [ { "name": "Word meaning" } ]
+}
+{% endschema %}

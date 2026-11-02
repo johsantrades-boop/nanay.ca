@@ -1,0 +1,15 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "tagline": "Our mission is to share the most comforting and nostalgic Filipino food.",
+        "newsletter_heading": "Subscribe to our newsletter",
+        "newsletter_text": "Sign up for exclusive discounts and the latest updates"
+      }
+    }
+  },
+  "order": ["footer"]
+}

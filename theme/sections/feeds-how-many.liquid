@@ -1,0 +1,74 @@
+<section class="section{% if section.settings.sand %} section--sand{% endif %}" aria-labelledby="fhm-{{ section.id }}">
+  <div class="container">
+    <div class="section-head reveal">
+      {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker }}</p>{%- endif -%}
+      <h2 class="h1" id="fhm-{{ section.id }}">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<p class="lead">{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+
+    <div class="stack-cards">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign p = block.settings.product
+          assign photo_i = block.settings.photo_index | default: 1 | minus: 1
+          assign img = p.media[photo_i].preview_image | default: p.featured_media.preview_image
+          if block.settings.image != blank
+            assign img = block.settings.image
+          endif
+          assign name = block.settings.title | default: p.title | split: ' (Good for' | first
+        -%}
+        <article class="stack-card" style="--n: {{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="stack-card__img">
+            {%- if img -%}
+              {{ img | image_url: width: 1200 | image_tag: widths: '480, 720, 960, 1200', sizes: '(min-width: 760px) 55vw, 100vw', loading: 'lazy', alt: name }}
+            {%- endif -%}
+          </div>
+          <div class="stack-card__body">
+            <p class="stack-card__serves"><span class="stack-card__num">{{ block.settings.serves }}</span><span class="stack-card__unit">{{ block.settings.unit }}</span></p>
+            <h3 class="h2">{{ name }}</h3>
+            {%- if block.settings.text != blank -%}<p class="muted">{{ block.settings.text }}</p>{%- endif -%}
+            {%- if p != blank -%}<p class="stack-card__price price">{% if p.price_varies %}<span class="muted small">from </span>{% endif %}{{ p.price_min | money }}</p>{%- endif -%}
+            <div class="stack-card__actions">
+              {%- if p != blank -%}<a class="btn" href="{{ p.url }}">See what's included</a>{%- endif -%}
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.link_label != blank -%}
+      <p style="margin-top:28px" class="reveal"><a class="link-arrow" href="{{ section.settings.link | default: '#planner' }}">{{ section.settings.link_label }}</a></p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feeds how many?",
+  "class": "section-feeds",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Small line", "default": "Sized for your crowd" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Feeds how many?" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "From a family dinner for 4 to a fiesta for 100. Pick your size, and Nanay takes care of the rest." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Not sure? Use the feast planner" },
+    { "type": "url", "id": "link", "label": "Link", "info": "Empty = jumps to the feast planner on the same page." },
+    { "type": "checkbox", "id": "sand", "label": "Sand background", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "size",
+      "name": "Feast size",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "serves", "label": "Number shown big", "default": "15" },
+        { "type": "text", "id": "unit", "label": "Unit", "default": "people" },
+        { "type": "text", "id": "title", "label": "Title", "info": "Empty = product title." },
+        { "type": "textarea", "id": "text", "label": "Short description" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Empty = product photo." },
+        { "type": "range", "id": "photo_index", "label": "Which product photo to use", "info": "1 = main photo. Use 2, 3… to skip a text graphic.", "min": 1, "max": 10, "step": 1, "default": 1 }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Feeds how many?" } ]
+}
+{% endschema %}

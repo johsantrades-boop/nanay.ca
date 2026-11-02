@@ -1,0 +1,96 @@
+{%- comment -%} Sends to the store's email via Shopify's contact form (Settings > Notifications > Contact customer). {%- endcomment -%}
+<section class="section{% if section.settings.sand %} section--sand{% endif %}" id="enquiry" aria-labelledby="eq-{{ section.id }}">
+  <div class="container" style="max-width:880px">
+    <div class="section-head">
+      {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker }}</p>{%- endif -%}
+      <h2 class="h1" id="eq-{{ section.id }}">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<p class="lead">{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+    <div class="panel">
+      {%- form 'contact', id: 'enquiry-form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="form-msg form-msg--ok" role="status" tabindex="-1" autofocus>{{ section.settings.success }}</p>
+        {%- else -%}
+          {%- if form.errors -%}
+            <div class="form-msg form-msg--err" role="alert" tabindex="-1" autofocus>
+              <p>Please check:</p>
+              <ul>{%- for field in form.errors -%}<li>{% if field == 'form' %}{{ form.errors.messages[field] }}{% else %}{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}{% endif %}</li>{%- endfor -%}</ul>
+            </div>
+          {%- endif -%}
+          <input type="hidden" name="contact[Enquiry type]" value="{{ section.settings.type }}">
+          <div class="form-grid form-grid--2">
+            <div class="field">
+              <label for="eq-name">Name <span aria-hidden="true">*</span></label>
+              <input class="input" id="eq-name" name="contact[name]" autocomplete="name" required value="{{ form.name }}">
+            </div>
+            <div class="field">
+              <label for="eq-phone">Phone (for texts) <span aria-hidden="true">*</span></label>
+              <input class="input" id="eq-phone" type="tel" name="contact[phone]" autocomplete="tel" required value="{{ form.phone }}">
+            </div>
+            <div class="field span-2">
+              <label for="eq-email">Email <span aria-hidden="true">*</span></label>
+              <input class="input" id="eq-email" type="email" name="contact[email]" autocomplete="email" required value="{{ form.email }}">
+            </div>
+            {%- if section.settings.event_fields -%}
+              <div class="field">
+                <label for="eq-date">Event date <span aria-hidden="true">*</span></label>
+                <input class="input" id="eq-date" type="date" name="contact[Event date]" required data-min-date>
+              </div>
+              <div class="field">
+                <label for="eq-guests">Number of guests <span aria-hidden="true">*</span></label>
+                <input class="input" id="eq-guests" type="number" inputmode="numeric" min="1" name="contact[Guests]" required>
+              </div>
+              <fieldset class="field span-2">
+                <legend>Pickup or delivery?</legend>
+                <div class="seg" style="grid-template-columns:1fr 1fr 1fr">
+                  <input type="radio" id="eq-f1" name="contact[Pickup or delivery]" value="Pickup" checked><label for="eq-f1">Pickup</label>
+                  <input type="radio" id="eq-f2" name="contact[Pickup or delivery]" value="Delivery"><label for="eq-f2">Delivery</label>
+                  <input type="radio" id="eq-f3" name="contact[Pickup or delivery]" value="Not sure"><label for="eq-f3">Not sure</label>
+                </div>
+              </fieldset>
+              <div class="field">
+                <label for="eq-type">Type of event</label>
+                <select class="select" id="eq-type" name="contact[Event type]">
+                  <option>Birthday</option><option>Family gathering / handaan</option><option>Wedding</option><option>Office / corporate</option><option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="eq-budget">Budget (optional)</label>
+                <input class="input" id="eq-budget" name="contact[Budget]" placeholder="e.g. $600">
+              </div>
+              <div class="field span-2">
+                <label for="eq-diet">Allergies or dietary needs</label>
+                <input class="input" id="eq-diet" name="contact[Dietary needs]" placeholder="e.g. 3 vegetarian guests, no shellfish">
+              </div>
+            {%- endif -%}
+            <div class="field span-2">
+              <label for="eq-msg">Message</label>
+              <textarea class="textarea" id="eq-msg" name="contact[body]" placeholder="{{ section.settings.placeholder }}">{{ form.body }}</textarea>
+              <p class="hint">We reply by text or email, usually the same day.</p>
+            </div>
+          </div>
+          <p class="note" style="margin-top:12px">Fields marked * are required.</p>
+          <button class="btn" type="submit" style="margin-top:16px">{{ section.settings.button }}</button>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Enquiry form",
+  "settings": [
+    { "type": "text", "id": "type", "label": "Enquiry type (shown in the email)", "default": "Catering" },
+    { "type": "checkbox", "id": "event_fields", "label": "Ask event date, guests, pickup/delivery, budget", "default": true },
+    { "type": "text", "id": "kicker", "label": "Small line", "default": "Catering enquiry" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Tell us about your event" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Share the date and headcount and we'll text you a plan and quote." },
+    { "type": "text", "id": "placeholder", "label": "Message placeholder", "default": "Anything else? Favourite dishes, timing, venue…" },
+    { "type": "text", "id": "button", "label": "Button", "default": "Send enquiry" },
+    { "type": "text", "id": "success", "label": "Thank-you message", "default": "Salamat! We got your enquiry and will text you soon." },
+    { "type": "checkbox", "id": "sand", "label": "Sand background", "default": false }
+  ],
+  "presets": [ { "name": "Enquiry form" } ]
+}
+{% endschema %}

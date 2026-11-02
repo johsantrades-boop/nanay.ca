@@ -1,0 +1,47 @@
+<div class="container section" style="max-width:520px">
+  <div id="login-box" class="stack">
+    <h1 class="h1">Log in</h1>
+    <p class="muted">See past orders and reorder your favourite feasts faster.</p>
+    <div class="panel">
+      {%- form 'customer_login', novalidate: 'novalidate' -%}
+        {%- if form.errors -%}<div class="form-msg form-msg--err" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <div class="form-grid">
+          <div class="field"><label for="login-email">Email</label><input class="input" id="login-email" type="email" name="customer[email]" autocomplete="email" required></div>
+          {%- if form.password_needed -%}
+            <div class="field"><label for="login-pw">Password</label><input class="input" id="login-pw" type="password" name="customer[password]" autocomplete="current-password" required></div>
+            <p><a href="#recover" data-toggle-recover>Forgot your password?</a></p>
+          {%- endif -%}
+          <button class="btn btn--block" type="submit">Log in</button>
+        </div>
+      {%- endform -%}
+    </div>
+    <p>New here? <a href="{{ routes.account_register_url }}">Create an account</a></p>
+    {%- if shop.checkout.guest_login -%}
+      {%- form 'guest_login' -%}<button class="btn btn--outline" type="submit">Continue as guest</button>{%- endform -%}
+    {%- endif -%}
+  </div>
+
+  <div id="recover" class="stack" hidden>
+    <h1 class="h1">Reset your password</h1>
+    <p class="muted">We'll email you a link.</p>
+    <div class="panel">
+      {%- form 'recover_customer_password' -%}
+        {%- if form.posted_successfully? -%}<p class="form-msg form-msg--ok" role="status">Check your email for a reset link.</p>{%- endif -%}
+        {%- if form.errors -%}<div class="form-msg form-msg--err" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <div class="form-grid">
+          <div class="field"><label for="recover-email">Email</label><input class="input" id="recover-email" type="email" name="email" autocomplete="email" required></div>
+          <button class="btn btn--block" type="submit">Send reset link</button>
+          <a href="#login-box" data-toggle-recover>Back to log in</a>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+<script>
+  (() => {
+    const a = document.getElementById('login-box'), b = document.getElementById('recover');
+    const show = r => { a.hidden = r; b.hidden = !r; };
+    if (location.hash === '#recover') show(true);
+    document.querySelectorAll('[data-toggle-recover]').forEach(l => l.addEventListener('click', e => { e.preventDefault(); show(b.hidden); }));
+  })();
+</script>
