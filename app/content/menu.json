@@ -936,15 +936,15 @@
  ],
  "instagram": [
   {
-   "image": "media/ig-10.webp",
-   "url": "https://www.instagram.com/nanaykitchen/reel/Dek4qrHiZIG/",
-   "alt": "Nanay's Silog Feast: longganisa, tapa and bangus over garlic fried rice",
-   "video": true
-  },
-  {
    "image": "media/ig-06.webp",
    "url": "https://www.instagram.com/nanaykitchen/reel/De8KFubCBNJ/",
    "alt": "Solo meals available for work lunches",
+   "video": true
+  },
+  {
+   "image": "media/ig-10.webp",
+   "url": "https://www.instagram.com/nanaykitchen/reel/Dek4qrHiZIG/",
+   "alt": "Nanay's Silog Feast: longganisa, tapa and bangus over garlic fried rice",
    "video": true
   },
   {
