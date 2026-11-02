@@ -10,3 +10,4 @@ assets/original-site/
 
 .DS_Store
 Thumbs.db
+app/static-build/
