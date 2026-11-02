@@ -42,11 +42,16 @@ Changes are live as soon as they're saved. Every save keeps a backup of the prev
 
 ## Hosting
 
-Any host that runs Node and keeps files between restarts works, for example Render (with a persistent disk), Railway (with a volume), Fly.io (with a volume) or a small VPS.
+**Render (set up):** `render.yaml` at the repo root is a Render Blueprint. In Render choose **New → Blueprint**, pick this GitHub repo, enter an admin password when asked, and create. It runs the server on the Starter plan with a 1 GB disk at `/var/data` for the menu, photos, backups and password. Every push to `main` redeploys; the disk is kept.
+
+**Vercel:** `vercel.json` builds a read-only copy of the page from `seed/menu.json` (`node app/build-static.mjs`). No admin there.
+
+Any other host that runs Node and keeps files between restarts also works, for example Railway (with a volume), Fly.io (with a volume) or a small VPS.
 
 - Start command: `node app/server.mjs`
 - Set `PORT` if the host requires it, and `NANAY_DATA_DIR` to the persistent disk's path.
 - Optionally set `NANAY_ADMIN_PASSWORD` for the first start instead of using the generated file.
+- Behind a host's proxy, set `NANAY_TRUST_PROXY=1` so the wrong-password lockout counts each visitor separately.
 - Serve it over **HTTPS** (all of these hosts do by default); the login cookie is marked Secure automatically.
 - Before launch, remove the `noindex` line near the top of `views/index.html` so Google can list the site.
 

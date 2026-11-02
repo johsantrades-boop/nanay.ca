@@ -1,0 +1,25 @@
+# Render Blueprint: the Nanay website + admin, with a disk that keeps the menu, photos and password.
+services:
+  - type: web
+    name: nanay
+    runtime: node
+    plan: starter
+    region: oregon
+    buildCommand: node --version
+    startCommand: node app/server.mjs
+    healthCheckPath: /robots.txt
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NANAY_DATA_DIR
+        value: /var/data
+      - key: NANAY_TRUST_PROXY
+        value: "1"
+      # Asked for when the Blueprint is created; used only on the very first start
+      - key: NANAY_ADMIN_PASSWORD
+        sync: false
+    disk:
+      name: nanay-data
+      mountPath: /var/data
+      sizeGB: 1

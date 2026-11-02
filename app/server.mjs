@@ -327,7 +327,9 @@ const sameOrigin = req => {
 const IMG_SIG = { webp: b => b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP', jpg: b => b[0] === 0xff && b[1] === 0xd8, png: b => b.toString('hex', 0, 8) === '89504e470d0a1a0a' };
 
 async function api(req, res, p) {
-  const ip = req.socket.remoteAddress || '';
+  // Behind a host's proxy (Render) the socket address is the proxy; its own entry is the last one in X-Forwarded-For
+  const fwd = process.env.NANAY_TRUST_PROXY === '1' && String(req.headers['x-forwarded-for'] || '').split(',').pop().trim();
+  const ip = fwd || req.socket.remoteAddress || '';
   if (req.method !== 'GET' && !sameOrigin(req)) return json(res, 403, { error: 'Request blocked' });
   if (p === '/api/admin/login' && req.method === 'POST') {
     const f = failed.get(ip);
