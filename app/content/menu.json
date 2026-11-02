@@ -1,0 +1,975 @@
+{
+ "settings": {
+  "phone": "+16046521930",
+  "phoneDisplay": "(604) 652-1930",
+  "email": "info@nanay.ca",
+  "instagram": "https://www.instagram.com/nanaykitchen/",
+  "hours": "Mon–Sun 10am–6pm",
+  "hoursSchema": "Mo-Su 10:00-18:00",
+  "pickupName": "Pureprep Commissary Kitchen",
+  "pickupAddress": "301-20381 62 Ave, Langley, BC",
+  "deliveryNote": "Minimum $30 purchase for delivery.",
+  "policy": "Orders can be modified up to 3 days before order pickup/delivery date. No refund or cancellation within 1 week of order pickup/delivery date. Credit can be issued upon request.",
+  "orderUrl": "https://nanay.ca"
+ },
+ "categories": [
+  {
+   "id": "feasts",
+   "name": "Family feasts",
+   "layout": "tabs",
+   "intro": "**Silog** = sinangag (garlic fried rice) + itlog (egg). The staple of Filipino breakfast, but better throughout the day.",
+   "banner": null
+  },
+  {
+   "id": "trays",
+   "name": "Trays",
+   "layout": "tabs",
+   "intro": "**Build your own party feast.** Mix trays to fit your crowd. Sizes run mini, half and full.",
+   "banner": null
+  },
+  {
+   "id": "frozen",
+   "name": "Frozen & solo meals",
+   "layout": "tabs",
+   "intro": "**Meals for one, and Nanay's grill in your freezer.** Solo meals are available for work lunches. The frozen meats are raw and marinated, ready to grill at home.",
+   "banner": {
+    "image": "media/ig-06.webp",
+    "url": "https://www.instagram.com/nanaykitchen/reel/De8KFubCBNJ/",
+    "caption": "Solo meals available for work lunches. Text to order.",
+    "alt": "Rows of individual meal containers on a kitchen counter"
+   }
+  },
+  {
+   "id": "grill",
+   "name": "Ready to grill",
+   "layout": "tabs",
+   "intro": "**Inihaw buckets for picnics and camping.** Hand-trimmed and marinated, ready for your grill.",
+   "banner": null
+  },
+  {
+   "id": "sweets",
+   "name": "Sweets",
+   "layout": "tabs",
+   "intro": "**Sweets, but not too sweet.** Sold by the set of ten 8 oz containers, good for about 20–30 people.",
+   "banner": null
+  },
+  {
+   "id": "handaan",
+   "name": "Party feasts",
+   "layout": "tiers",
+   "intro": "",
+   "banner": null
+  }
+ ],
+ "items": [
+  {
+   "id": "silog-feast",
+   "category": "feasts",
+   "name": "Silog Feast",
+   "gloss": "Garlic fried rice, meats & fried eggs",
+   "tagline": "",
+   "description": "Garlic fried rice, tapa and longganisa, Coligny Creek fried eggs and spiced vinegar. The full feast adds fried bangus.",
+   "options": [
+    {
+     "label": "Mini Silog Feast",
+     "servesMin": 4,
+     "servesMax": 4,
+     "price": 100,
+     "url": ""
+    },
+    {
+     "label": "Silog Feast",
+     "servesMin": 6,
+     "servesMax": 8,
+     "price": 160,
+     "url": ""
+    }
+   ],
+   "image": {
+    "sm": "media/silog-480.webp",
+    "lg": "media/silog-900.webp",
+    "alt": "Silog feast in two foil trays: tapa, longganisa and fried bangus above garlic rice topped with fried eggs"
+   },
+   "tray": "",
+   "badges": [],
+   "note": "Includes spiced vinegar",
+   "contains": "Egg",
+   "heating": "",
+   "featured": true,
+   "plannerStyle": "silog",
+   "orderUrl": "https://nanay.ca/products/mother-s-day-weekend-silogs",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "inihaw-feast",
+   "category": "feasts",
+   "name": "Inihaw Feast",
+   "gloss": "Two grilled meats over rice",
+   "tagline": "",
+   "description": "Your choice of two: chicken inasal, grilled liempo (marinated pork belly) or 12 BBQ pork skewers. With garlic vinegar.",
+   "options": [
+    {
+     "label": "With steamed white rice",
+     "servesMin": 6,
+     "servesMax": 8,
+     "price": 140,
+     "url": ""
+    },
+    {
+     "label": "With garlic fried rice",
+     "servesMin": 6,
+     "servesMax": 8,
+     "price": 180,
+     "url": ""
+    }
+   ],
+   "image": {
+    "sm": "media/inihaw-480.webp",
+    "lg": "media/inihaw-900.webp",
+    "alt": "Grilled pork skewers and chicken inasal over garlic fried rice on a banana leaf"
+   },
+   "tray": "",
+   "badges": [],
+   "note": "Pick 2 meats",
+   "contains": "",
+   "heating": "",
+   "featured": true,
+   "plannerStyle": "inihaw",
+   "orderUrl": "https://nanay.ca/products/inihaw-feast",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "mini-inihaw-feast",
+   "category": "feasts",
+   "name": "Mini Inihaw Feast",
+   "gloss": "Two grilled meats, made small",
+   "tagline": "",
+   "description": "Your choice of two: chicken inasal, grilled liempo or BBQ pork skewers on a bed of steamed white rice, with Nanay Vinegar.",
+   "options": [
+    {
+     "label": "Good for 4",
+     "servesMin": 4,
+     "servesMax": 4,
+     "price": 80,
+     "url": ""
+    }
+   ],
+   "image": {
+    "sm": "media/skewers-480.webp",
+    "lg": "media/skewers-900.webp",
+    "alt": "Glazed BBQ pork skewers topped with garlic bits and green onion"
+   },
+   "tray": "",
+   "badges": [],
+   "note": "Pick 2 meats",
+   "contains": "",
+   "heating": "",
+   "featured": true,
+   "plannerStyle": "inihaw",
+   "orderUrl": "https://nanay.ca/products/mini-inihaw-bbq-grilled-feast",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "chicken-inasal-tray",
+   "category": "trays",
+   "name": "Chicken Inasal",
+   "gloss": "Grilled BBQ chicken",
+   "tagline": "",
+   "description": "Grilled and sliced boneless chicken legs (drumstick and thigh) marinated in soy, garlic, lemongrass and ginger. Topped with housemade garlic bits and green onions.",
+   "options": [
+    {
+     "label": "Mini",
+     "servesMin": 8,
+     "servesMax": 10,
+     "price": 80,
+     "url": ""
+    },
+    {
+     "label": "Half",
+     "servesMin": 12,
+     "servesMax": 15,
+     "price": 120,
+     "url": ""
+    },
+    {
+     "label": "Full",
+     "servesMin": 25,
+     "servesMax": 30,
+     "price": 220,
+     "url": ""
+    }
+   ],
+   "image": {
+    "sm": "media/inasal-480.webp",
+    "lg": "media/inasal-900.webp",
+    "alt": "Char-grilled chicken inasal with calamansi on banana leaves"
+   },
+   "tray": "",
+   "badges": [],
+   "note": "Boneless chicken legs",
+   "contains": "Soy",
+   "heating": "",
+   "featured": true,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/chicken-inasal-grilled-bbq-chicken",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "grilled-skewers",
+   "category": "trays",
+   "name": "Grilled Skewers",
+   "gloss": "Pork BBQ",
+   "tagline": "$4.50 a skewer",
+   "description": "Tender pork marinated in a sweet and savoury Filipino BBQ sauce, topped with inihaw sauce, garlic bits and green onions. Nanay Vinegar included.",
+   "options": [
+    {
+     "label": "20 skewers",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 90,
+     "url": ""
+    },
+    {
+     "label": "30 skewers",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 135,
+     "url": ""
+    },
+    {
+     "label": "60 skewers",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 270,
+     "url": ""
+    },
+    {
+     "label": "90 skewers",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 405,
+     "url": ""
+    },
+    {
+     "label": "120 skewers",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 540,
+     "url": ""
+    }
+   ],
+   "image": {
+    "sm": "media/skewers-480.webp",
+    "lg": "media/skewers-900.webp",
+    "alt": "BBQ pork skewers on banana leaf with spiced vinegar"
+   },
+   "tray": "",
+   "badges": [],
+   "note": "Nanay Vinegar included",
+   "contains": "",
+   "heating": "",
+   "featured": true,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/skewers-meal",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "palabok",
+   "category": "trays",
+   "name": "Palabok",
+   "gloss": "Filipino rice noodles",
+   "tagline": "",
+   "description": "With pork, tofu and dried shrimp sauce, topped with chicharon crunchies, calamansi, free-range Coligny Creek eggs, spring onions and housemade garlic bits.",
+   "options": [
+    {
+     "label": "Mini tray",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 45,
+     "url": ""
+    },
+    {
+     "label": "Half tray",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 85,
+     "url": ""
+    },
+    {
+     "label": "Full tray",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 160,
+     "url": ""
+    }
+   ],
+   "image": {
+    "sm": "media/palabok-480.webp",
+    "lg": "media/palabok-900.webp",
+    "alt": "Palabok rice noodles in orange sauce topped with sliced eggs, calamansi and green onions"
+   },
+   "tray": "",
+   "badges": [],
+   "note": "",
+   "contains": "Shrimp, pork, egg, tofu",
+   "heating": "",
+   "featured": true,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/palabok",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "liempo-tray",
+   "category": "trays",
+   "name": "Inihaw na Liempo",
+   "gloss": "Grilled marinated pork belly",
+   "tagline": "",
+   "description": "",
+   "options": [
+    {
+     "label": "Mini",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 80,
+     "url": ""
+    },
+    {
+     "label": "Half",
+     "servesMin": 10,
+     "servesMax": 12,
+     "price": 120,
+     "url": ""
+    },
+    {
+     "label": "Full",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 240,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [],
+   "note": "",
+   "contains": "",
+   "heating": "",
+   "featured": false,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/inihaw-na-liempo-tray",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "half-half-tray",
+   "category": "trays",
+   "name": "Half/Half Inihaw Tray",
+   "gloss": "Two meats in one tray",
+   "tagline": "",
+   "description": "Choose two: chicken inasal, liempo or BBQ pork skewers.",
+   "options": [
+    {
+     "label": "Half/half tray",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 120,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [],
+   "note": "",
+   "contains": "",
+   "heating": "",
+   "featured": false,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/chicken-inasal-liempo-tray",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "beef-tapa-tray",
+   "category": "trays",
+   "name": "Beef Tapa",
+   "gloss": "Half deep tray",
+   "tagline": "",
+   "description": "",
+   "options": [
+    {
+     "label": "Without eggs",
+     "servesMin": 10,
+     "servesMax": 12,
+     "price": 150,
+     "url": ""
+    },
+    {
+     "label": "With eggs",
+     "servesMin": 10,
+     "servesMax": 12,
+     "price": 160,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [],
+   "note": "",
+   "contains": "",
+   "heating": "",
+   "featured": false,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/beef-tapa-tray",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "longganisa-tray",
+   "category": "trays",
+   "name": "Longganisa",
+   "gloss": "Half deep tray",
+   "tagline": "",
+   "description": "",
+   "options": [
+    {
+     "label": "Half deep tray",
+     "servesMin": 10,
+     "servesMax": 12,
+     "price": 130,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [],
+   "note": "",
+   "contains": "",
+   "heating": "",
+   "featured": false,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/longganisa-tray",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "spaghetti-tray",
+   "category": "trays",
+   "name": "Filipino Style Spaghetti",
+   "gloss": "Sweet and tart, with SPAM",
+   "tagline": "",
+   "description": "Sweet and tart Filipino style meaty spaghetti with SPAM.",
+   "options": [
+    {
+     "label": "Mini",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 45,
+     "url": ""
+    },
+    {
+     "label": "Half",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 85,
+     "url": ""
+    },
+    {
+     "label": "Full",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 160,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [],
+   "note": "",
+   "contains": "",
+   "heating": "",
+   "featured": false,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/filipino-style-spaghetti-new-years-eve-only",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "solo-silog",
+   "category": "frozen",
+   "name": "Solo Silog",
+   "gloss": "Silog for one",
+   "tagline": "",
+   "description": "Garlic fried rice, a fried egg and spiced vinegar, with your choice of ulam.",
+   "options": [
+    {
+     "label": "Beef Tapa",
+     "servesMin": 1,
+     "servesMax": 1,
+     "price": 20,
+     "url": ""
+    },
+    {
+     "label": "Grilled Pork Belly",
+     "servesMin": 1,
+     "servesMax": 1,
+     "price": 20,
+     "url": ""
+    },
+    {
+     "label": "Tortang Talong",
+     "servesMin": 1,
+     "servesMax": 1,
+     "price": 20,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [
+    "solo"
+   ],
+   "note": "",
+   "contains": "Egg",
+   "heating": "",
+   "featured": false,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/solo-silog",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "solo-shrimp",
+   "category": "frozen",
+   "name": "Solo Shrimp",
+   "gloss": "Meal for one",
+   "tagline": "",
+   "description": "",
+   "options": [
+    {
+     "label": "Solo Shrimp",
+     "servesMin": 1,
+     "servesMax": 1,
+     "price": 24,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [
+    "solo"
+   ],
+   "note": "",
+   "contains": "Shrimp",
+   "heating": "",
+   "featured": false,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/solo-shrimp",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "frozen-chicken-inasal",
+   "category": "frozen",
+   "name": "Frozen Chicken Inasal",
+   "gloss": "Raw, marinated, frozen",
+   "tagline": "",
+   "description": "Free-range boneless chicken legs (thighs + drumstick) marinated in soy, garlic, ginger, lemongrass and calamansi.",
+   "options": [
+    {
+     "label": "6-pack",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 36,
+     "url": ""
+    },
+    {
+     "label": "12-pack",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 70,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [
+    "frozen"
+   ],
+   "note": "",
+   "contains": "Soy",
+   "heating": "Defrost in the refrigerator overnight. Grill flat over charcoal for best results (propane or stovetop works), 6–8 minutes each side on medium-high heat, until it reaches 75°C (165°F). Enjoy with toyomansi and rice.",
+   "featured": false,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/chicken-inasal-fully-cooked",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "frozen-skewers",
+   "category": "frozen",
+   "name": "Frozen Skewers",
+   "gloss": "Marinated pork skewers",
+   "tagline": "$3.75 a skewer",
+   "description": "8 marinated skewers, raw and frozen.",
+   "options": [
+    {
+     "label": "8 skewers",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 30,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [
+    "frozen"
+   ],
+   "note": "",
+   "contains": "",
+   "heating": "Defrost in the refrigerator overnight. Grill flat over charcoal for best results (propane or stovetop works), 4 minutes each side on medium-high heat, until it reaches 75°C (165°F). Enjoy with garlic spiced vinegar and steamed rice.",
+   "featured": false,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/the-skewers-new-years-eve-feature",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "frozen-liempo",
+   "category": "frozen",
+   "name": "Frozen Liempo",
+   "gloss": "Marinated, hand-trimmed pork belly",
+   "tagline": "$2.50 a piece",
+   "description": "",
+   "options": [
+    {
+     "label": "12 pcs",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 30,
+     "url": ""
+    },
+    {
+     "label": "20 pcs",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 50,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [
+    "frozen"
+   ],
+   "note": "",
+   "contains": "",
+   "heating": "Defrost in the refrigerator overnight. Grill flat over charcoal for best results (propane or stovetop works), 4 minutes each side on medium-high heat, until it reaches 75°C (165°F). Enjoy with garlic spiced vinegar and steamed rice.",
+   "featured": false,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/frozen-liempo",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "frozen-beef-tapa",
+   "category": "frozen",
+   "name": "Frozen Beef Tapa",
+   "gloss": "Raw and marinated",
+   "tagline": "",
+   "description": "",
+   "options": [
+    {
+     "label": "Pack",
+     "servesMin": 4,
+     "servesMax": 6,
+     "price": 40,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [
+    "frozen"
+   ],
+   "note": "",
+   "contains": "",
+   "heating": "",
+   "featured": false,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/beef-tapa-raw-marinated",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "inihaw-buckets",
+   "category": "grill",
+   "name": "Inihaw Buckets",
+   "gloss": "Marinated, raw, yours to grill",
+   "tagline": "",
+   "description": "Bring the bucket, light the coals. Each one is hand-trimmed and marinated by Nanay's kitchen.",
+   "options": [
+    {
+     "label": "Chicken Inasal · 4.5 kg (approx. 18–20 pcs)",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 115,
+     "url": "https://nanay.ca/products/chicken-inasal-bucket"
+    },
+    {
+     "label": "Liempo · 3.5 kg",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 115,
+     "url": "https://nanay.ca/products/inihaw-na-liempo-bucket"
+    },
+    {
+     "label": "Skewers · 30 pcs",
+     "servesMin": 0,
+     "servesMax": 0,
+     "price": 120,
+     "url": "https://nanay.ca/products/skewers-bucket"
+    }
+   ],
+   "image": {
+    "sm": "/uploads/mvzhg9wi-69206d812c02.webp",
+    "lg": "/uploads/mvzhgbcr-9b1f64d39630.webp",
+    "alt": "Grilled chicken legs and pork skewers on a banana leaf in a rattan tray, outdoors"
+   },
+   "tray": "",
+   "badges": [],
+   "note": "Order by bucket",
+   "contains": "",
+   "heating": "",
+   "featured": true,
+   "plannerStyle": "",
+   "orderUrl": "https://nanay.ca/products/chicken-inasal-bucket",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "ube-halaya",
+   "category": "sweets",
+   "name": "Ube Halaya",
+   "gloss": "Purple yam jam",
+   "tagline": "",
+   "description": "10 × 8 oz. Good for about 20–30 people.",
+   "options": [
+    {
+     "label": "Set of 10",
+     "servesMin": 20,
+     "servesMax": 30,
+     "price": 100,
+     "url": ""
+    }
+   ],
+   "image": {
+    "sm": "media/ube-480.webp",
+    "lg": "media/ube-900.webp",
+    "alt": "Purple ube halaya in an 8 oz container"
+   },
+   "tray": "ube",
+   "badges": [
+    "dessert"
+   ],
+   "note": "",
+   "contains": "",
+   "heating": "",
+   "featured": true,
+   "plannerStyle": "dessert",
+   "orderUrl": "https://nanay.ca/products/ube-halaya",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "leche-flan",
+   "category": "sweets",
+   "name": "Leche Flan",
+   "gloss": "Caramel custard",
+   "tagline": "",
+   "description": "10 × 8 oz. Good for about 20–30 people.",
+   "options": [
+    {
+     "label": "Set of 10",
+     "servesMin": 20,
+     "servesMax": 30,
+     "price": 100,
+     "url": ""
+    }
+   ],
+   "image": {
+    "sm": "media/flan-480.webp",
+    "lg": "media/flan-900.webp",
+    "alt": "Golden leche flan with caramel in an 8 oz container"
+   },
+   "tray": "caramel",
+   "badges": [
+    "dessert"
+   ],
+   "note": "",
+   "contains": "",
+   "heating": "",
+   "featured": true,
+   "plannerStyle": "dessert",
+   "orderUrl": "https://nanay.ca/products/leche-flan",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "party-feast",
+   "category": "handaan",
+   "name": "Party Feast",
+   "gloss": "",
+   "tagline": "",
+   "description": "Steamed rice, palabok or spaghetti, a half/half meat tray and a grilled meat tray of your choice.",
+   "options": [
+    {
+     "label": "Party Feast",
+     "servesMin": 15,
+     "servesMax": 15,
+     "price": 350,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [],
+   "note": "",
+   "contains": "",
+   "heating": "",
+   "featured": false,
+   "plannerStyle": "party",
+   "orderUrl": "https://nanay.ca/products/party-feast-good-for-12-13-people",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "fiesta-feast",
+   "category": "handaan",
+   "name": "Fiesta Feast",
+   "gloss": "",
+   "tagline": "",
+   "description": "Steamed rice ×2, palabok, spaghetti and three inihaw meat trays of your choice. All half-size deep trays.",
+   "options": [
+    {
+     "label": "Fiesta Feast",
+     "servesMin": 30,
+     "servesMax": 35,
+     "price": 620,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [],
+   "note": "",
+   "contains": "",
+   "heating": "",
+   "featured": false,
+   "plannerStyle": "party",
+   "orderUrl": "https://nanay.ca/products/fiesta-feast-good-for-30-35-people",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "feast-for-50",
+   "category": "handaan",
+   "name": "Feast for 50",
+   "gloss": "",
+   "tagline": "",
+   "description": "Full trays: 2 steamed rice, palabok, spaghetti, liempo, chicken inasal, plus 50 BBQ pork skewers and Nanay Vinegar.",
+   "options": [
+    {
+     "label": "Feast for 50",
+     "servesMin": 50,
+     "servesMax": 50,
+     "price": 1080,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [],
+   "note": "",
+   "contains": "",
+   "heating": "",
+   "featured": false,
+   "plannerStyle": "party",
+   "orderUrl": "https://nanay.ca/products/feast-for-50",
+   "soldOut": false,
+   "hidden": false
+  },
+  {
+   "id": "fiesta-festival",
+   "category": "handaan",
+   "name": "Fiesta Festival",
+   "gloss": "",
+   "tagline": "",
+   "description": "Full trays: 4 steamed rice, 2 palabok, 2 spaghetti, 2 liempo, 2 chicken inasal, plus 100 BBQ pork skewers.",
+   "options": [
+    {
+     "label": "Fiesta Festival",
+     "servesMin": 100,
+     "servesMax": 100,
+     "price": 2000,
+     "url": ""
+    }
+   ],
+   "image": null,
+   "tray": "",
+   "badges": [],
+   "note": "",
+   "contains": "",
+   "heating": "",
+   "featured": false,
+   "plannerStyle": "party",
+   "orderUrl": "https://nanay.ca/products/fiesta-festival-good-for-100",
+   "soldOut": false,
+   "hidden": false
+  }
+ ],
+ "instagram": [
+  {
+   "image": "media/ig-10.webp",
+   "url": "https://www.instagram.com/nanaykitchen/reel/Dek4qrHiZIG/",
+   "alt": "Nanay's Silog Feast: longganisa, tapa and bangus over garlic fried rice",
+   "video": true
+  },
+  {
+   "image": "media/ig-06.webp",
+   "url": "https://www.instagram.com/nanaykitchen/reel/De8KFubCBNJ/",
+   "alt": "Solo meals available for work lunches",
+   "video": true
+  },
+  {
+   "image": "media/ig-07.webp",
+   "url": "https://www.instagram.com/nanaykitchen/reel/De2_FLIiTLj/",
+   "alt": "Packing a grilled liempo tray in Nanay's kitchen",
+   "video": true
+  },
+  {
+   "image": "media/ig-04.webp",
+   "url": "https://www.instagram.com/nanaykitchen/reel/DfBQl5RC3UD/",
+   "alt": "A Feast for 50: trays of palabok, spaghetti, liempo and chicken inasal",
+   "video": true
+  },
+  {
+   "image": "media/ig-09.webp",
+   "url": "https://www.instagram.com/nanaykitchen/reel/Denr6IUiKPw/",
+   "alt": "Behind the scenes: one of the cooks holding a tray of palabok for a Fiesta Feast",
+   "video": true
+  },
+  {
+   "image": "media/ig-02.webp",
+   "url": "https://www.instagram.com/nanaykitchen/p/DX0jQNqm21d/",
+   "alt": "A silog tray of fried eggs, beef tapa and longganisa",
+   "video": false
+  }
+ ]
+}
