@@ -4,7 +4,17 @@
   "installCommand": "",
   "buildCommand": "node app/build-static.mjs",
   "outputDirectory": "app/static-build",
+  "ignoreCommand": "git log -1 --pretty=%s | grep -q '^\\[upload\\]'",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/uploads/:name", "destination": "/api/admin/file?name=:name" }
+  ],
   "headers": [
-    { "source": "/(media|fonts)/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }] }
+    { "source": "/(media|fonts)/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }] },
+    { "source": "/admin", "headers": [
+      { "key": "Cache-Control", "value": "no-store" },
+      { "key": "X-Frame-Options", "value": "DENY" },
+      { "key": "X-Robots-Tag", "value": "noindex" }
+    ] }
   ]
 }

@@ -29,37 +29,38 @@ node app/server.mjs set-password "a long new password"
 | **Business info** | Phone, email, hours, pickup place and address (feeds the Google Maps link), delivery note, refund policy, online store link. |
 | **Password** | Change the admin password (signs out other devices). |
 
-Changes are live as soon as they're saved. Every save keeps a backup of the previous menu in `app/data/backups/` (last 30).
+Locally, changes are live as soon as they're saved and each save keeps a backup in `app/data/backups/` (last 30). Online (Vercel), each save is a commit to GitHub, so the commit history is the backup, and the site shows the change after Vercel rebuilds (about a minute).
 
 ## Files
 
-- `server.mjs`: the web server, admin API and page rendering.
+- `server.mjs`: the local web server and admin API.
+- `lib/site.mjs`: shared code that cleans saved menus and renders the page.
+- `build-static.mjs`: renders the site to `static-build/` for Vercel.
+- `../api/admin/[action].mjs`: the admin API on Vercel, saving to GitHub.
+- `content/`: the menu, photos and password hash saved by the online admin (created on first save).
 - `views/index.html`: the website template (the original design).
 - `views/admin.html`: the admin panel.
 - `public/`: photos, video, fonts and icons.
 - `seed/menu.json`: the starting menu (used only when `data/menu.json` doesn't exist yet).
 - `data/`: the live menu, uploaded photos, backups and the password hash. **Back this folder up** and keep it out of public file sharing.
 
-## Hosting
+## Hosting (free: Vercel + GitHub)
 
-**Render (set up):** `render.yaml` at the repo root is a Render Blueprint. In Render choose **New → Blueprint**, pick this GitHub repo, enter an admin password when asked, and create. It runs the server on the Starter plan with a 1 GB disk at `/var/data` for the menu, photos, backups and password. Every push to `main` redeploys; the disk is kept.
+The live site runs on Vercel's free plan. Vercel has no disk, so the online admin saves into this GitHub repo instead (`app/content/`), and every menu save triggers a rebuild. Photo uploads and password changes are committed with `[upload]` and don't rebuild on their own (`ignoreCommand` in `vercel.json`); the next menu save picks them up, and until then `/uploads/*` is served from the repo by the API.
 
-**Vercel:** `vercel.json` builds a read-only copy of the page from `seed/menu.json` (`node app/build-static.mjs`). No admin there.
+One-time setup in Vercel (Project → Settings → Environment Variables), then redeploy:
 
-Any other host that runs Node and keeps files between restarts also works, for example Railway (with a volume), Fly.io (with a volume) or a small VPS.
+- `GITHUB_TOKEN`: a fine-grained GitHub token with **Contents: Read and write** on this repo only.
+- `NANAY_ADMIN_PASSWORD`: the first admin password (10+ characters). After the owner changes it in the admin, the hash in `app/content/auth.json` is used instead.
 
-- Start command: `node app/server.mjs`
-- Set `PORT` if the host requires it, and `NANAY_DATA_DIR` to the persistent disk's path.
-- Optionally set `NANAY_ADMIN_PASSWORD` for the first start instead of using the generated file.
-- Behind a host's proxy, set `NANAY_TRUST_PROXY=1` so the wrong-password lockout counts each visitor separately.
-- Serve it over **HTTPS** (all of these hosts do by default); the login cookie is marked Secure automatically.
-- Before launch, remove the `noindex` line near the top of `views/index.html` so Google can list the site.
+Admin: `https://<your-site>/admin`. Before launch, remove the `noindex` line near the top of `views/index.html` so Google can list the site.
 
-Static-only hosts (Vercel or Netlify without a database) can't keep admin changes, because their file systems reset.
+To run the full server elsewhere instead (a VPS, or a host with a persistent disk): start `node app/server.mjs`, set `PORT`, `NANAY_DATA_DIR` to the disk's path, and `NANAY_TRUST_PROXY=1` behind a proxy.
 
 ## Security notes
 
 - Passwords are stored only as a salted scrypt hash.
 - Logins use an HttpOnly, SameSite=Strict session cookie (12 hours). After 8 wrong passwords, logins from that address pause for 15 minutes.
 - Admin changes must come from the admin page itself (same-origin check plus a custom header), so other sites can't submit them.
-- Everything saved is cleaned on the server: unknown fields are dropped, text is length-limited, links must be https/sms/tel/mailto, and photos must be real JPG/PNG/WebP files (max 4 MB).
+- Everything saved is cleaned on the server: unknown fields are dropped, text is length-limited, links must be https/sms/tel/mailto, and photos must be real JPG/PNG/WebP files (max 4 MB locally, 3 MB online).
+- Online, sessions are signed cookies (the signing key comes from `GITHUB_TOKEN`); changing the password signs out other devices. Keep the GitHub repo **private**: it holds the password hash.
