@@ -397,7 +397,11 @@ legend small{font:400 13px var(--sans);color:var(--ink-soft);margin-left:6px}
   function showLogin() { $('#appView').hidden = true; $('#loginView').hidden = false; $('#pw').focus(); }
   async function boot() {
     try { const r = await api('/api/admin/data'); doc = r.data; BADGES = r.badges; $('#loginView').hidden = true; $('#appView').hidden = false; renderAll(); status('All changes saved'); }
-    catch (e) { if (e.status === 401) showLogin(); else status(e.message, true); }
+    catch (e) {
+      showLogin();
+      // e.g. "not set up yet": show it on the login screen, since the app view is hidden
+      if (e.status !== 401) { $('#loginErr').textContent = e.message; $('#loginErr').hidden = false; }
+    }
   }
   $('#loginForm').addEventListener('submit', async e => {
     e.preventDefault();
